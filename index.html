@@ -63,6 +63,17 @@
 </head>
 <body class="flex flex-col justify-between">
 
+    <!-- AUDIO BGM TERSEMBUNYI -->
+    <audio id="bgmAudio" loop></audio>
+
+    <!-- FLOATING MUSIC PLAYER BUTTON -->
+    <div class="fixed bottom-4 right-4 z-50 flex items-center space-x-2 glass-card px-3 py-2 rounded-full border border-neonBlue/40 shadow-neon">
+        <button onclick="toggleBGM()" id="bgmToggleBtn" class="w-8 h-8 rounded-full bg-neonBlue/20 text-neonBlue flex items-center justify-center text-xs shadow-neon">
+            <i class="fa-solid fa-music" id="bgmIcon"></i>
+        </button>
+        <span class="text-[10px] text-slate-300 font-semibold pr-2" id="bgmStatusText">Musik BGM</span>
+    </div>
+
     <!-- MAINTENANCE OVERLAY -->
     <div id="maintenanceOverlay" class="hidden fixed inset-0 bg-[#030712]/95 z-[100] flex flex-col items-center justify-center p-6 text-center space-y-4 backdrop-blur-xl">
         <div class="w-20 h-20 rounded-3xl bg-cyan-500/10 border border-cyan-500/30 text-neonBlue flex items-center justify-center text-3xl shadow-neon animate-pulse">
@@ -104,9 +115,9 @@
             <div class="relative overflow-hidden rounded-3xl glass-card p-6 md:p-8 border border-neonBlue/40 shadow-neon-lg flex flex-col md:flex-row items-center justify-between">
                 <div class="absolute -right-10 -top-10 w-48 h-48 bg-neonBlue/20 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="space-y-3 max-w-md z-10 text-center md:text-left">
-                    <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40 shadow-neon">"Satoru Gojo Style" Store</span>
+                    <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40 shadow-neon">"Satoru Gojo Style" Store[span_0](start_span)[span_0](end_span)</span>
                     <h1 class="text-2xl md:text-4xl font-black tracking-tight leading-tight text-white">Top Up Game Terkuat & <span class="bg-gradient-to-r from-neonBlue to-neonPurple bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(0,242,254,0.6)]">Tanpa Batas</span></h1>
-                    <p class="text-slate-300 text-xs md:text-sm">Proses kilat 24 jam dengan pelayanan sekelas Penyihir Tingkat Khusus!</p>
+                    <p class="text-slate-300 text-xs md:text-sm">Proses kilat 24 jam dengan pelayanan sekelas Penyihir Tingkat Khusus[span_1](start_span)[span_1](end_span)!</p>
                 </div>
                 <div class="mt-4 md:mt-0 relative z-10">
                     <div class="w-32 h-32 md:w-36 md:h-36 rounded-2xl overflow-hidden border-2 border-neonBlue shadow-neon relative bg-darkBg flex items-center justify-center group">
@@ -130,7 +141,7 @@
                     <div id="selectedGameIcon" class="w-12 h-12 rounded-2xl bg-neonBlue/10 border border-neonBlue/30 flex items-center justify-center text-neonBlue text-xl font-bold shadow-neon"></div>
                     <div>
                         <h3 id="selectedGameTitle" class="text-base font-bold text-white"></h3>
-                        <p class="text-[11px] text-slate-400">Masukkan ID & pilih metode pembayaran</p>
+                        <p class="text-[11px] text-slate-400">Masukkan ID, Kupon Diskon & Pilih Pembayaran</p>
                     </div>
                 </div>
 
@@ -144,6 +155,17 @@
                             </div>
                             <span id="nicknameResult" class="text-[10px] text-emerald-400 mt-1 block font-semibold"></span>
                         </div>
+
+                        <!-- FITUR KODE KUPON DISKON -->
+                        <div>
+                            <label class="block text-xs font-medium mb-1.5 text-slate-300">Kode Kupon Diskon (Opsional)</label>
+                            <div class="flex space-x-2">
+                                <input id="inputCoupon" type="text" placeholder="Misal: SANCHESZX" class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white uppercase">
+                                <button onclick="applyCoupon()" class="px-4 py-2 bg-neonPurple/20 border border-neonPurple/40 text-neonPurple text-xs font-bold rounded-2xl hover:bg-neonPurple/30 transition">Pakai</button>
+                            </div>
+                            <span id="couponNotice" class="text-[10px] text-cyan-300 mt-1 block font-semibold"></span>
+                        </div>
+
                         <div>
                             <label class="block text-xs font-medium mb-1.5 text-slate-300">Metode Pembayaran</label>
                             <select id="selectPayment" class="w-full neon-input rounded-2xl px-3.5 py-2.5 text-sm text-white">
@@ -156,7 +178,7 @@
 
                     <div>
                         <label class="block text-xs font-medium mb-1.5 text-slate-300">Pilih Nominal Top-Up</label>
-                        <div id="nominalList" class="grid grid-cols-2 gap-2 max-h-52 overflow-y-auto pr-1"></div>
+                        <div id="nominalList" class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1"></div>
                     </div>
                 </div>
 
@@ -218,7 +240,25 @@
                     <h2 class="text-base font-black text-neonPurple"><i class="fa-solid fa-shield-halved mr-2"></i> Admin Control Panel</h2>
                     <button onclick="resetData()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-xl hover:bg-red-500/30 transition">Reset Default</button>
                 </div>
-                <p class="text-xs text-slate-400">Pusat kontrol pengaturan toko, produk, pengumuman, dan maintenance.</p>
+                <p class="text-xs text-slate-400">Pusat kontrol kupon diskon, musik latar, produk, dan maintenance.</p>
+            </div>
+
+            <!-- PENGATURAN MUSIK BGM ANIME -->
+            <div class="glass-card p-5 rounded-3xl border border-neonBlue/30 space-y-3">
+                <h3 class="font-bold text-xs text-neonBlue uppercase tracking-wider"><i class="fa-solid fa-music mr-1.5"></i> Atur Musik Latar (BGM Anime)</h3>
+                <p class="text-xs text-slate-400">Masukkan link audio MP3 langsung (contoh dari internet/GitHub) untuk diputar di web.</p>
+                <input id="inputBgmUrl" type="text" placeholder="https://domain.com/lagu.mp3" class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                <button onclick="saveBgmUrl()" class="w-full py-2.5 bg-neonBlue/20 border border-neonBlue/40 text-neonBlue font-bold text-xs rounded-2xl hover:bg-neonBlue/30 transition">Simpan & Putar Musik</button>
+            </div>
+
+            <!-- PENGATURAN KODE KUPON DISKON -->
+            <div class="glass-card p-5 rounded-3xl border border-neonPurple/30 space-y-3">
+                <h3 class="font-bold text-xs text-neonPurple uppercase tracking-wider"><i class="fa-solid fa-ticket mr-1.5"></i> Atur Kupon Diskon</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input id="inputCouponCode" type="text" placeholder="Kode (Contoh: SANCHES)" class="neon-input rounded-2xl px-3.5 py-2 text-xs text-white uppercase">
+                    <input id="inputCouponDisc" type="number" placeholder="Potongan Harga (Rp, misal: 5000)" class="neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                </div>
+                <button onclick="saveCouponSetting()" class="w-full py-2.5 bg-neonPurple/20 border border-neonPurple/40 text-neonPurple font-bold text-xs rounded-2xl hover:bg-neonPurple/30 transition">Simpan Kupon Diskon</button>
             </div>
 
             <!-- KELOLA TESTIMONI -->
@@ -231,25 +271,22 @@
                 <button onclick="saveTestimonial()" class="w-full py-2.5 bg-neonPurple/20 border border-neonPurple/40 text-neonPurple font-bold text-xs rounded-2xl hover:bg-neonPurple/30 transition">Simpan Testimoni</button>
             </div>
 
-            <!-- PENGUMUMAN -->
-            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
-                <h3 class="font-bold text-xs text-neonBlue uppercase tracking-wider"><i class="fa-solid fa-bullhorn mr-1.5"></i> Banner Pengumuman Web</h3>
-                <input id="inputAnnouncement" type="text" placeholder="Tulis pengumuman gangguan atau promo..." class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
-                <div class="flex justify-between items-center pt-1">
-                    <span id="announcementStatusText" class="text-xs text-slate-400">Status: Sembunyikan</span>
-                    <div class="space-x-2">
-                        <button onclick="saveAnnouncement(true)" class="px-3 py-1.5 bg-neonBlue/20 border border-neonBlue/40 text-neonBlue font-bold text-xs rounded-xl hover:bg-neonBlue/30 transition">Tampilkan</button>
-                        <button onclick="saveAnnouncement(false)" class="px-3 py-1.5 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl hover:bg-slate-700 transition">Sembunyikan</button>
+            <!-- PENGUMUMAN & MAINTENANCE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                    <h3 class="font-bold text-xs text-neonBlue uppercase tracking-wider">Banner Pengumuman</h3>
+                    <input id="inputAnnouncement" type="text" placeholder="Tulis pengumuman..." class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                    <div class="flex space-x-2">
+                        <button onclick="saveAnnouncement(true)" class="w-full py-2 bg-neonBlue/20 border border-neonBlue/40 text-neonBlue text-xs font-bold rounded-xl">Tampilkan</button>
+                        <button onclick="saveAnnouncement(false)" class="w-full py-2 bg-slate-800 text-slate-300 text-xs font-semibold rounded-xl">Sembunyikan</button>
                     </div>
                 </div>
-            </div>
-
-            <!-- MAINTENANCE -->
-            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
-                <h3 class="font-bold text-xs text-amber-400 uppercase tracking-wider"><i class="fa-solid fa-gears mr-1.5"></i> Mode Maintenance (Perbaikan)</h3>
-                <div class="flex justify-between items-center">
-                    <span id="maintenanceStatusText" class="text-xs font-bold text-white">Status: Nonaktif</span>
-                    <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-xl hover:bg-amber-500/30 transition">Aktifkan</button>
+                <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                    <h3 class="font-bold text-xs text-amber-400 uppercase tracking-wider">Mode Maintenance</h3>
+                    <div class="flex justify-between items-center pt-2">
+                        <span id="maintenanceStatusText" class="text-xs font-bold text-white">Status: Nonaktif</span>
+                        <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-xl">Aktifkan</button>
+                    </div>
                 </div>
             </div>
 
@@ -338,6 +375,12 @@
         let orderHistory = JSON.parse(localStorage.getItem('sancheszxHistory')) || [];
         let isMaintenance = JSON.parse(localStorage.getItem('sancheszxMaintenance')) || false;
         let storeAnnouncement = JSON.parse(localStorage.getItem('sancheszxAnnouncement')) || { active: false, text: '' };
+        
+        // Data Kupon & BGM Musik
+        let couponSettings = JSON.parse(localStorage.getItem('sancheszxCoupon')) || { code: 'SANCHESZX', discount: 5000 };
+        let bgmUrl = localStorage.getItem('sancheszxBgm') || 'https://www.bensound.com/bensound-music/bensound-memories.mp3'; // Default musik santai
+        let isBgmPlaying = false;
+        let activeDiscount = 0;
 
         function saveData() {
             localStorage.setItem('sancheszxGames', JSON.stringify(gamesData));
@@ -351,12 +394,76 @@
                 testimonialsData = JSON.parse(JSON.stringify(defaultTestimonials));
                 localStorage.removeItem('sancheszxGames');
                 localStorage.removeItem('sancheszxTestimonials');
+                localStorage.removeItem('sancheszxCoupon');
+                localStorage.removeItem('sancheszxBgm');
                 saveData();
                 renderTestimonials();
                 alert('Data berhasil direset!');
             }
         }
 
+        // KONTROL MUSIK BGM
+        function initBGM() {
+            const audio = document.getElementById('bgmAudio');
+            if(audio) {
+                audio.src = bgmUrl;
+            }
+        }
+
+        function toggleBGM() {
+            const audio = document.getElementById('bgmAudio');
+            const icon = document.getElementById('bgmIcon');
+            const statusText = document.getElementById('bgmStatusText');
+
+            if (isBgmPlaying) {
+                audio.pause();
+                isBgmPlaying = false;
+                icon.className = "fa-solid fa-music";
+                statusText.innerText = "Musik Mati";
+            } else {
+                audio.play().then(() => {
+                    isBgmPlaying = true;
+                    icon.className = "fa-solid fa-volume-high animate-bounce";
+                    statusText.innerText = "Memutar Musik";
+                }).catch(e => {
+                    alert('Gagal memutar musik. Pastikan link URL audio valid (.mp3)');
+                });
+            }
+        }
+
+        function saveBgmUrl() {
+            const url = document.getElementById('inputBgmUrl').value.trim();
+            if(!url) return alert('Link URL audio tidak boleh kosong!');
+            bgmUrl = url;
+            localStorage.setItem('sancheszxBgm', bgmUrl);
+            initBGM();
+            alert('Musik BGM berhasil diperbarui!');
+        }
+
+        // KELOLA KUPON DISKON
+        function saveCouponSetting() {
+            const code = document.getElementById('inputCouponCode').value.trim().toUpperCase();
+            const disc = parseInt(document.getElementById('inputCouponDisc').value);
+            if(!code || isNaN(disc)) return alert('Kode dan nominal diskon harus diisi dengan benar!');
+            couponSettings = { code, discount: disc };
+            localStorage.setItem('sancheszxCoupon', JSON.stringify(couponSettings));
+            alert('Kupon diskon berhasil disimpan!');
+        }
+
+        function applyCoupon() {
+            const inputCode = document.getElementById('inputCoupon').value.trim().toUpperCase();
+            const notice = document.getElementById('couponNotice');
+            
+            if (inputCode === couponSettings.code) {
+                activeDiscount = couponSettings.discount;
+                notice.innerHTML = `<span class='text-emerald-400'>✓ Kupon aktif! Potongan Rp ${activeDiscount.toLocaleString('id-ID')}</span>`;
+            } else {
+                activeDiscount = 0;
+                notice.innerHTML = `<span class='text-red-400'>✕ Kode kupon salah atau kedaluwarsa!</span>`;
+            }
+        }
+    </script>
+    <script>
         function checkNickname() {
             const userId = document.getElementById('inputUserId').value.trim();
             const resultSpan = document.getElementById('nicknameResult');
@@ -401,7 +508,7 @@
             container.innerHTML = '';
             testimonialsData.forEach((t, idx) => {
                 container.innerHTML += `
-                    <div class="bg-darkBg/80 p-3 rounded-2xl border border-white/10 space-y-1 relative">
+                    <div class="glass-card p-3 rounded-2xl border border-white/10 space-y-1 relative">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-xs text-neonBlue">${t.name}</span>
                             <div class="text-amber-400 text-[10px]"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
@@ -412,8 +519,7 @@
                 `;
             });
         }
-    </script>
-    <script>
+
         function saveTestimonial() {
             const name = document.getElementById('inputTestiName').value.trim();
             const text = document.getElementById('inputTestiText').value.trim();
@@ -442,7 +548,7 @@
             container.innerHTML = '';
             orderHistory.forEach((h) => {
                 container.innerHTML += `
-                    <div class="bg-darkBg/90 p-3.5 rounded-2xl border border-white/10 flex justify-between items-center text-xs">
+                    <div class="glass-card p-3.5 rounded-2xl border border-white/10 flex justify-between items-center text-xs">
                         <div class="space-y-0.5">
                             <div class="font-bold text-white">${h.game} - <span class="text-neonBlue">${h.item}</span></div>
                             <div class="text-[10px] text-slate-400">ID: ${h.userId} | ${h.payment} (${h.price})</div>
@@ -508,12 +614,12 @@
                     statusText.innerText = "Status: AKTIF (Web Ditutup)";
                     statusText.className = "text-xs font-bold text-red-400";
                     btn.innerText = "Matikan";
-                    btn.className = "px-4 py-2 bg-red-500/20 border border-red-500/40 text-red-400 font-bold text-xs rounded-xl hover:bg-red-500/30 transition";
+                    btn.className = "px-4 py-2 bg-red-500/20 border border-red-500/40 text-red-400 font-bold text-xs rounded-xl";
                 } else {
                     statusText.innerText = "Status: Nonaktif (Normal)";
                     statusText.className = "text-xs font-bold text-emerald-400";
                     btn.innerText = "Aktifkan";
-                    btn.className = "px-4 py-2 bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-xl hover:bg-amber-500/30 transition";
+                    btn.className = "px-4 py-2 bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-xl";
                 }
             }
         }
@@ -608,6 +714,9 @@
             document.getElementById('selectedGameTitle').innerText = currentGame.name;
             document.getElementById('selectedGameIcon').innerHTML = `<i class="${currentGame.icon}"></i>`;
             document.getElementById('nicknameResult').innerText = '';
+            document.getElementById('couponNotice').innerText = '';
+            document.getElementById('inputCoupon').value = '';
+            activeDiscount = 0;
 
             const nominalList = document.getElementById('nominalList');
             nominalList.innerHTML = '';
@@ -643,12 +752,15 @@
             const selectedItem = currentGame.items[itemIndex];
             const paymentMethod = document.getElementById('selectPayment').value;
 
+            let finalPrice = selectedItem.price - activeDiscount;
+            if(finalPrice < 0) finalPrice = 0;
+
             currentOrderData = {
                 game: currentGame.name,
                 userId: userId,
-                item: selectedItem.name,
+                item: selectedItem.name + (activeDiscount > 0 ? ` (Diskon Rp ${activeDiscount.toLocaleString('id-ID')})` : ''),
                 payment: paymentMethod,
-                price: 'Rp ' + selectedItem.price.toLocaleString('id-ID'),
+                price: 'Rp ' + finalPrice.toLocaleString('id-ID'),
                 date: new Date().toLocaleString('id-ID')
             };
 
@@ -797,6 +909,7 @@
             renderTestimonials();
             checkMaintenanceMode();
             updateAnnouncementUI();
+            initBGM();
         });
     </script>
 </body>
