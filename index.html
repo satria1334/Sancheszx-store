@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GojoStore - Top Up Games Infinity</title>
-    <!-- Google Fonts & Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,16 +24,11 @@
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-8px)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 15px rgba(0, 240, 255, 0.5)' },
-                            '50%': { boxShadow: '0 0 35px rgba(0, 240, 255, 0.9)' },
+                            '50%': { transform: 'translateY(-6px)' },
                         }
                     },
                     animation: {
                         'float': 'float 3s ease-in-out infinite',
-                        'glow': 'pulseGlow 2.5s ease-in-out infinite',
                     }
                 }
             }
@@ -51,10 +45,9 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- NAVBAR -->
     <nav class="bg-cardBg/90 backdrop-blur-md border-b border-neonBlue/30 sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon animate-pulse">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon">
                 <i class="fa-solid fa-bolt text-darkBg font-bold text-sm"></i>
             </div>
             <span class="text-base font-extrabold tracking-wider bg-gradient-to-r from-neonBlue to-white bg-clip-text text-transparent">GOJO<span class="text-neonBlue">STORE</span></span>
@@ -65,12 +58,9 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl">
+    <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl space-y-6">
 
-        <!-- SHOP SECTION -->
         <section id="shopSection" class="space-y-6">
-            <!-- Hero Banner Gojo Style with Floating & Alive Animation -->
             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/60 via-cardBg to-purple-900/60 p-6 border border-neonBlue/40 shadow-neon flex flex-col md:flex-row items-center justify-between">
                 <div class="space-y-3 max-w-md z-10 text-center md:text-left">
                     <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40">Infinite Void Top Up</span>
@@ -78,25 +68,20 @@
                     <p class="text-slate-300 text-xs md:text-sm">Proses instan 24 jam dengan kekuatan penuh Gojo Satoru!</p>
                 </div>
                 <div class="mt-4 md:mt-0 relative">
-                    <!-- Gojo Image with Floating & Glow Animation (Hidup/Gerak-Gerik Halus) -->
-                    <div class="w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden border-2 border-neonBlue shadow-neon-lg relative group animate-float animate-glow">
-                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop&q=80" alt="Gojo Satoru Anime" class="w-full h-full object-cover filter brightness-110 group-hover:scale-110 transition duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-transparent to-transparent flex items-end p-2 justify-center">
-                            <span class="text-[10px] font-extrabold text-neonBlue tracking-widest drop-shadow-[0_0_8px_#00f0ff]">INFINITY VOID</span>
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border-2 border-neonBlue shadow-neon-lg relative animate-float bg-darkBg flex items-center justify-center">
+                        <img src="https://i.pinimg.com/736x/8d/68/73/8d68739116e0b7410c57c4cf318182b8.jpg" alt="Gojo Satoru" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBg/80 via-transparent to-transparent flex items-end justify-center pb-1">
+                            <span class="text-[9px] font-extrabold text-neonBlue tracking-widest">SATORU GOJO</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Game List Grid -->
             <div>
                 <h2 class="text-lg font-bold mb-3 flex items-center"><i class="fa-solid fa-gamepad text-neonBlue mr-2"></i> Pilih Game</h2>
-                <div id="gameGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    <!-- Render via JavaScript -->
-                </div>
+                <div id="gameGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
             </div>
 
-            <!-- Selected Game Detail & Nominal -->
             <div id="transactionCard" class="hidden bg-cardBg rounded-2xl p-5 border border-neonBlue/40 shadow-neon space-y-5">
                 <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
                     <div id="selectedGameIcon" class="w-10 h-10 rounded-xl bg-neonBlue/20 flex items-center justify-center text-neonBlue text-xl font-bold"></div>
@@ -107,7 +92,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Input ID -->
                     <div class="space-y-3">
                         <div>
                             <label class="block text-xs font-medium mb-1 text-slate-300">User ID / Server ID</label>
@@ -124,12 +108,9 @@
                         </div>
                     </div>
 
-                    <!-- Nominal List -->
                     <div>
                         <label class="block text-xs font-medium mb-1 text-slate-300">Pilih Nominal</label>
-                        <div id="nominalList" class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
-                            <!-- Render via JavaScript -->
-                        </div>
+                        <div id="nominalList" class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1"></div>
                     </div>
                 </div>
 
@@ -139,7 +120,6 @@
             </div>
         </section>
 
-        <!-- ADMIN / DEVELOPER PANEL SECTION -->
         <section id="adminSection" class="hidden space-y-5">
             <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] space-y-3">
                 <div class="flex justify-between items-center">
@@ -150,7 +130,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Form Tambah/Edit Game -->
                 <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/30 space-y-3">
                     <h3 class="font-bold text-sm text-neonBlue">Tambah Game Baru</h3>
                     <div>
@@ -164,14 +143,11 @@
                     <button onclick="saveGame()" class="w-full py-2.5 bg-neonBlue text-darkBg font-bold text-sm rounded-xl shadow-neon hover:bg-cyan-400 transition">Simpan Game</button>
                 </div>
 
-                <!-- Form Tambah Nominal Item -->
                 <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/30 space-y-3">
                     <h3 class="font-bold text-sm text-neonBlue">Kelola Nominal & Harga</h3>
                     <div>
                         <label class="block text-xs text-slate-300 mb-1">Pilih Game Target</label>
-                        <select id="selectTargetGame" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                            <!-- Render via JS -->
-                        </select>
+                        <select id="selectTargetGame" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white"></select>
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
@@ -187,20 +163,16 @@
                 </div>
             </div>
 
-            <!-- List Game Management Table -->
             <div class="bg-cardBg p-5 rounded-2xl border border-slate-800">
                 <h3 class="font-bold text-sm mb-3">Daftar Game & Item Saat Ini</h3>
-                <div id="adminGameListContainer" class="space-y-3">
-                    <!-- Render via JS -->
-                </div>
+                <div id="adminGameListContainer" class="space-y-3"></div>
             </div>
         </section>
 
     </main>
 
-    <!-- INVOICE / SUCCESS MODAL -->
     <div id="invoiceModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg animate-pulse">
+        <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg">
             <div class="text-center space-y-1">
                 <div class="w-12 h-12 mx-auto rounded-full bg-neonBlue/20 text-neonBlue flex items-center justify-center text-xl font-bold mb-2">
                     <i class="fa-solid fa-check"></i>
@@ -219,12 +191,9 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="bg-cardBg border-t border-neonBlue/20 text-center py-4 mt-8 text-xs text-slate-400">
         <p>&copy; 2026 GojoStore. All rights reserved. Domain Infinity Void.</p>
     </footer>
-
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         const defaultData = [
             { id: 'ff', name: 'Free Fire', icon: 'fa-solid fa-fire', items: [{name: '70 Diamonds', price: 10000}, {name: '140 Diamonds', price: 20000}, {name: '355 Diamonds', price: 50000}] },
@@ -246,6 +215,7 @@
         function resetData() {
             if(confirm('Reset semua data ke pengaturan awal?')) {
                 gamesData = JSON.parse(JSON.stringify(defaultData));
+                localStorage.removeItem('gojoStoreData');
                 saveData();
             }
         }
@@ -280,4 +250,150 @@
                         <div class="w-10 h-10 mx-auto rounded-lg bg-darkBg flex items-center justify-center text-neonBlue text-lg group-hover:shadow-neon transition">
                             <i class="${game.icon}"></i>
                         </div>
-                        <h4 class
+                        <h4 class="font-bold text-xs truncate">${game.name}</h4>
+                    </div>
+                `;
+            });
+        }
+
+        let currentGame = null;
+        function selectGame(gameId) {
+            currentGame = gamesData.find(g => g.id === gameId);
+            if(!currentGame) return;
+
+            document.getElementById('transactionCard').classList.remove('hidden');
+            document.getElementById('selectedGameTitle').innerText = currentGame.name;
+            document.getElementById('selectedGameIcon').innerHTML = `<i class="${currentGame.icon}"></i>`;
+
+            const nominalList = document.getElementById('nominalList');
+            nominalList.innerHTML = '';
+            currentGame.items.forEach((item, idx) => {
+                nominalList.innerHTML += `
+                    <label class="border border-slate-800 bg-darkBg p-2.5 rounded-xl cursor-pointer hover:border-neonBlue transition flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[11px] font-semibold text-slate-300">${item.name}</span>
+                            <input type="radio" name="nominal" value="${idx}" class="accent-cyan-400" ${idx === 0 ? 'checked' : ''}>
+                        </div>
+                        <span class="text-xs font-bold text-neonBlue">Rp ${item.price.toLocaleString('id-ID')}</span>
+                    </label>
+                `;
+            });
+            window.scrollTo({top: document.getElementById('transactionCard').offsetTop - 60, behavior: 'smooth'});
+        }
+
+        function processCheckout() {
+            const userId = document.getElementById('inputUserId').value.trim();
+            if(!userId) {
+                alert('Silakan masukkan User ID / Server ID terlebih dahulu!');
+                document.getElementById('inputUserId').focus();
+                return;
+            }
+
+            const selectedRadio = document.querySelector('input[name="nominal"]:checked');
+            if(!selectedRadio) {
+                alert('Silakan pilih nominal top-up terlebih dahulu!');
+                return;
+            }
+
+            const itemIndex = parseInt(selectedRadio.value);
+            const selectedItem = currentGame.items[itemIndex];
+            const paymentMethod = document.getElementById('selectPayment').value;
+
+            document.getElementById('invGame').innerText = currentGame.name;
+            document.getElementById('invUser').innerText = userId;
+            document.getElementById('invItem').innerText = selectedItem.name;
+            document.getElementById('invPay').innerText = paymentMethod;
+            document.getElementById('invPrice').innerText = 'Rp ' + selectedItem.price.toLocaleString('id-ID');
+
+            document.getElementById('invoiceModal').classList.remove('hidden');
+        }
+
+        function closeInvoice() {
+            document.getElementById('invoiceModal').classList.add('hidden');
+            document.getElementById('inputUserId').value = '';
+            document.getElementById('transactionCard').classList.add('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function renderAdmin() {
+            const selectTarget = document.getElementById('selectTargetGame');
+            if(!selectTarget) return;
+            selectTarget.innerHTML = '';
+            gamesData.forEach(g => {
+                selectTarget.innerHTML += `<option value="${g.id}">${g.name}</option>`;
+            });
+
+            const container = document.getElementById('adminGameListContainer');
+            container.innerHTML = '';
+            gamesData.forEach(g => {
+                let itemsHtml = g.items.map((it, idx) => `
+                    <div class="flex justify-between items-center bg-darkBg px-3 py-1.5 rounded-lg text-xs mb-1">
+                        <span>${it.name} - <strong class="text-neonBlue">Rp ${it.price.toLocaleString('id-ID')}</strong></span>
+                        <button onclick="deleteItem('${g.id}', ${idx})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `).join('');
+
+                container.innerHTML += `
+                    <div class="bg-darkBg/50 p-3 rounded-xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-xs text-neonBlue"><i class="${g.icon} mr-1"></i> ${g.name}</span>
+                            <button onclick="deleteGame('${g.id}')" class="text-red-400 hover:text-red-300 text-[10px]"><i class="fa-solid fa-trash mr-1"></i> Hapus</button>
+                        </div>
+                        <div class="pl-3 border-l-2 border-neonBlue/30 space-y-1">
+                            ${itemsHtml || '<span class="text-[10px] text-slate-500">Belum ada item.</span>'}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function saveGame() {
+            const name = document.getElementById('inputGameName').value.trim();
+            const icon = document.getElementById('inputGameIcon').value.trim();
+            if(!name) return alert('Nama game wajib diisi!');
+
+            const id = name.toLowerCase().replace(/\s+/g, '');
+            gamesData.push({ id, name, icon: icon || 'fa-solid fa-gamepad', items: [] });
+            document.getElementById('inputGameName').value = '';
+            saveData();
+            alert('Game berhasil ditambahkan!');
+        }
+
+        function saveNominal() {
+            const targetId = document.getElementById('selectTargetGame').value;
+            const itemName = document.getElementById('inputItemName').value.trim();
+            const itemPrice = parseInt(document.getElementById('inputItemPrice').value);
+
+            if(!itemName || isNaN(itemPrice)) return alert('Nama item dan harga harus diisi dengan benar!');
+
+            const game = gamesData.find(g => g.id === targetId);
+            if(game) {
+                game.items.push({ name: itemName, price: itemPrice });
+                document.getElementById('inputItemName').value = '';
+                document.getElementById('inputItemPrice').value = '';
+                saveData();
+                alert('Nominal berhasil ditambahkan!');
+            }
+        }
+
+        function deleteGame(gameId) {
+            if(confirm('Hapus game ini?')) {
+                gamesData = gamesData.filter(g => g.id !== gameId);
+                saveData();
+            }
+        }
+
+        function deleteItem(gameId, itemIdx) {
+            const game = gamesData.find(g => g.id === gameId);
+            if(game) {
+                game.items.splice(itemIdx, 1);
+                saveData();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderShop();
+        });
+    </script>
+</body>
+</html>
