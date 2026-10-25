@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sancheszx Store - Top Up Games</title>
+    <title>Sancheszx Store - Top Up Games Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -53,7 +53,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- LAYAR PEMBERITAHUAN MAINTENANCE -->
+    <!-- MAINTENANCE OVERLAY -->
     <div id="maintenanceOverlay" class="hidden fixed inset-0 bg-darkBg/95 z-[100] flex flex-col items-center justify-center p-6 text-center space-y-4 backdrop-blur-md">
         <div class="w-16 h-16 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-bounce">
             <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -65,7 +65,7 @@
         </button>
     </div>
 
-    <!-- BANNER NOTIFIKASI / PENGUMUMAN DI ATAS WEB -->
+    <!-- BANNER PENGUMUMAN -->
     <div id="announcementBanner" class="hidden bg-gradient-to-r from-amber-500/20 via-yellow-500/30 to-amber-500/20 border-b border-yellow-500/40 px-4 py-2 text-center text-xs text-yellow-300 font-medium flex items-center justify-center space-x-2 z-40">
         <i class="fa-solid fa-bullhorn animate-bounce"></i>
         <span id="announcementTextDisplay"></span>
@@ -81,6 +81,8 @@
         </div>
         <div class="flex items-center space-x-2">
             <button onclick="switchTab('shop')" id="navShop" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition">Shop</button>
+            <button onclick="switchTab('tools')" id="navTools" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-calculator mr-1"></i> Tools WR</button>
+            <button onclick="switchTab('history')" id="navHistory" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Riwayat</button>
             <button onclick="tryOpenAdmin()" id="navAdmin" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-lock mr-1"></i> Admin</button>
         </div>
     </nav>
@@ -109,12 +111,13 @@
                 <div id="gameGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
             </div>
 
+            <!-- TRANSACTION CARD -->
             <div id="transactionCard" class="hidden bg-cardBg rounded-2xl p-5 border border-neonBlue/40 shadow-neon space-y-5">
                 <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
                     <div id="selectedGameIcon" class="w-10 h-10 rounded-xl bg-neonBlue/20 flex items-center justify-center text-neonBlue text-xl font-bold"></div>
                     <div>
                         <h3 id="selectedGameTitle" class="text-lg font-bold"></h3>
-                        <p class="text-[11px] text-slate-400">Masukkan ID & Pilih Nominal Item</p>
+                        <p class="text-[11px] text-slate-400">Masukkan ID & Cek Nickname</p>
                     </div>
                 </div>
 
@@ -122,14 +125,18 @@
                     <div class="space-y-3">
                         <div>
                             <label class="block text-xs font-medium mb-1 text-slate-300">User ID / Server ID</label>
-                            <input id="inputUserId" type="text" placeholder="Contoh: 12345678 (1234)" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                            <div class="flex space-x-2">
+                                <input id="inputUserId" type="text" placeholder="Contoh: 12345678 (1234)" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                                <button onclick="checkNickname()" class="px-3 py-2 bg-neonBlue/20 border border-neonBlue text-neonBlue text-xs font-bold rounded-xl hover:bg-neonBlue/30 transition">Cek</button>
+                            </div>
+                            <span id="nicknameResult" class="text-[10px] text-emerald-400 mt-1 block font-semibold"></span>
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1 text-slate-300">Metode Pembayaran</label>
                             <select id="selectPayment" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
                                 <option value="QRIS">1. QRIS (Satu Untuk Semua)</option>
-                                <option value="GoPay">2. GoPay (085603088228)</option>
-                                <option value="DANA">3. DANA (083878003915)</option>
+                                <option value="GoPay">2. GoPay (6285603088228)</option>
+                                <option value="DANA">3. DANA (6283878003915)</option>
                             </select>
                         </div>
                     </div>
@@ -144,8 +151,48 @@
                     BAYAR SEKARANG
                 </button>
             </div>
+
+            <!-- TESTIMONIALS SECTION -->
+            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 space-y-3">
+                <h3 class="font-bold text-sm flex items-center text-neonBlue"><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Testimoni Pelanggan Setia</h3>
+                <div id="testimonialContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+            </div>
         </section>
 
+        <!-- TOOLS / WIN RATE CALCULATOR SECTION -->
+        <section id="toolsSection" class="hidden space-y-5">
+            <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/40 shadow-neon space-y-4 max-w-lg mx-auto">
+                <h2 class="text-base font-bold text-neonBlue text-center"><i class="fa-solid fa-calculator mr-2"></i> Kalkulator Win Rate ML</h2>
+                <p class="text-xs text-slate-400 text-center">Hitung jumlah kemenangan beruntun yang kamu butuhkan untuk target Win Rate!</p>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">Total Match Saat Ini</label>
+                        <input id="totalMatch" type="number" placeholder="Contoh: 500" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">Win Rate Saat Ini (%)</label>
+                        <input id="currentWr" type="number" step="0.1" placeholder="Contoh: 55.5" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">Target Win Rate (%)</label>
+                        <input id="targetWr" type="number" step="0.1" placeholder="Contoh: 60.0" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    </div>
+                    <button onclick="calculateWinRate()" class="w-full py-2.5 bg-neonBlue text-darkBg font-bold text-sm rounded-xl shadow-neon hover:bg-cyan-400 transition">Hitung Sekarang</button>
+                    <div id="wrResult" class="bg-darkBg p-3 rounded-xl border border-slate-800 text-xs text-center text-slate-300 font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORY SECTION -->
+        <section id="historySection" class="hidden space-y-4">
+            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-base font-bold text-white"><i class="fa-solid fa-clock-rotate-left text-neonBlue mr-2"></i> Riwayat Transaksi</h2>
+                    <button onclick="clearHistory()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Hapus Riwayat</button>
+                </div>
+                <div id="historyListContainer" class="space-y-2"></div>
+            </div>
+        </section>
         <!-- ADMIN PANEL -->
         <section id="adminSection" class="hidden space-y-5">
             <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] space-y-3">
@@ -153,66 +200,58 @@
                     <h2 class="text-base font-bold text-neonPurple"><i class="fa-solid fa-code mr-2"></i> Developer Control Panel</h2>
                     <button onclick="resetData()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Reset Default</button>
                 </div>
-                <p class="text-xs text-slate-400">Atur pengumuman, mode perbaikan, game, dan harga langsung dari panel ini.</p>
+                <p class="text-xs text-slate-400">Kelola web, testimoni, pengumuman, dan maintenance langsung dari panel ini.</p>
             </div>
 
-            <!-- FITUR PENGATURAN NOTIFIKASI / PENGUMUMAN WEB -->
+            <!-- KELOLA TESTIMONI -->
+            <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/30 space-y-3">
+                <h3 class="font-bold text-sm text-neonPurple"><i class="fa-solid fa-star mr-2"></i> Tambah Testimoni Baru</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input id="inputTestiName" type="text" placeholder="Nama Pelanggan" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    <input id="inputTestiText" type="text" placeholder="Ulasan (Mantap, proses cepat!)" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                </div>
+                <button onclick="saveTestimonial()" class="w-full py-2 bg-neonPurple text-white font-bold text-xs rounded-xl hover:bg-purple-600 transition">Tambah Testimoni</button>
+            </div>
+
+            <!-- PENGATURAN PENGUMUMAN -->
             <div class="bg-cardBg p-5 rounded-2xl border border-cyan-500/40 space-y-3">
-                <h3 class="font-bold text-sm text-neonBlue"><i class="fa-solid fa-bullhorn mr-2"></i> Pengaturan Notifikasi / Pengumuman Web</h3>
-                <p class="text-xs text-slate-400">Tulis pemberitahuan (misal: <em>"QRIS sedang gangguan, silakan gunakan DANA/GoPay"</em>) yang akan tampil di atas web.</p>
-                <div class="space-y-2">
-                    <input id="inputAnnouncement" type="text" placeholder="Tulis pesan pengumuman di sini..." class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-1">
-                        <span id="announcementStatusText" class="text-xs text-slate-300">Status: Sembunyi</span>
-                        <div class="flex space-x-2">
-                            <button onclick="saveAnnouncement(true)" class="px-3 py-1.5 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Tampilkan di Web</button>
-                            <button onclick="saveAnnouncement(false)" class="px-3 py-1.5 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl hover:bg-slate-700 transition">Sembunyikan</button>
-                        </div>
+                <h3 class="font-bold text-sm text-neonBlue"><i class="fa-solid fa-bullhorn mr-2"></i> Pengaturan Pengumuman Web</h3>
+                <input id="inputAnnouncement" type="text" placeholder="Tulis pengumuman (Misal: QRIS normal kembali)..." class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                <div class="flex justify-between items-center pt-1">
+                    <span id="announcementStatusText" class="text-xs text-slate-300">Status: Sembunyikan</span>
+                    <div class="space-x-2">
+                        <button onclick="saveAnnouncement(true)" class="px-3 py-1.5 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Tampilkan</button>
+                        <button onclick="saveAnnouncement(false)" class="px-3 py-1.5 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl hover:bg-slate-700 transition">Sembunyikan</button>
                     </div>
                 </div>
             </div>
 
             <!-- PENGATURAN MAINTENANCE -->
             <div class="bg-cardBg p-5 rounded-2xl border border-yellow-500/40 space-y-3">
-                <h3 class="font-bold text-sm text-yellow-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Mode Maintenance (Perbaikan)</h3>
-                <p class="text-xs text-slate-400">Nyalakan mode ini jika web sedang diperbaiki agar pengunjung melihat halaman perbaikan.</p>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1">
+                <h3 class="font-bold text-sm text-yellow-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Mode Maintenance</h3>
+                <div class="flex justify-between items-center">
                     <span id="maintenanceStatusText" class="text-xs font-bold text-white">Status: Nonaktif</span>
-                    <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400">Aktifkan Maintenance</button>
+                    <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400">Aktifkan</button>
                 </div>
             </div>
 
+            <!-- KELOLA GAME & NOMINAL -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/30 space-y-3">
                     <h3 class="font-bold text-sm text-neonBlue">Tambah Game Baru</h3>
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">Nama Game</label>
-                        <input id="inputGameName" type="text" placeholder="Misal: Valorant" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">Kode Ikon (FontAwesome)</label>
-                        <input id="inputGameIcon" type="text" placeholder="fa-solid fa-shield" value="fa-solid fa-gamepad" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                    </div>
-                    <button onclick="saveGame()" class="w-full py-2.5 bg-neonBlue text-darkBg font-bold text-sm rounded-xl shadow-neon hover:bg-cyan-400 transition">Simpan Game</button>
+                    <input id="inputGameName" type="text" placeholder="Nama Game" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    <input id="inputGameIcon" type="text" placeholder="Ikon (fa-solid fa-gamepad)" value="fa-solid fa-gamepad" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    <button onclick="saveGame()" class="w-full py-2 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Simpan Game</button>
                 </div>
 
                 <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/30 space-y-3">
-                    <h3 class="font-bold text-sm text-neonBlue">Kelola Nominal & Harga</h3>
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">Pilih Game Target</label>
-                        <select id="selectTargetGame" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white"></select>
-                    </div>
+                    <h3 class="font-bold text-sm text-neonBlue">Tambah Nominal & Harga</h3>
+                    <select id="selectTargetGame" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white"></select>
                     <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-xs text-slate-300 mb-1">Nama Item</label>
-                            <input id="inputItemName" type="text" placeholder="100 Diamond" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-300 mb-1">Harga (Rp)</label>
-                            <input id="inputItemPrice" type="number" placeholder="15000" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                        </div>
+                        <input id="inputItemName" type="text" placeholder="100 Diamond" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                        <input id="inputItemPrice" type="number" placeholder="15000" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
                     </div>
-                    <button onclick="saveNominal()" class="w-full py-2.5 bg-neonPurple text-white font-bold text-sm rounded-xl shadow-[0_0_10px_rgba(168,85,247,0.5)] hover:bg-purple-600 transition">Tambah Nominal</button>
+                    <button onclick="saveNominal()" class="w-full py-2 bg-neonPurple text-white font-bold text-xs rounded-xl hover:bg-purple-600 transition">Tambah Item</button>
                 </div>
             </div>
 
@@ -223,6 +262,7 @@
         </section>
 
     </main>
+
     <!-- INVOICE MODAL -->
     <div id="invoiceModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg">
@@ -234,7 +274,10 @@
                 <p class="text-xs text-slate-400">Selesaikan pembayaran sesuai metode pilihan.</p>
             </div>
 
-            <div id="paymentContentContainer" class="bg-darkBg p-3 rounded-xl text-center space-y-2 border border-slate-800"></div>
+            <div id="paymentContentContainer" class="bg-darkBg p-3 rounded-xl text-center space-y-2 border border-slate-800">
+                <!-- QRIS Asli[span_0](start_span)[span_0](end_span) -->
+                <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS Sancheszx Store" class="w-32 h-32 mx-auto object-contain">
+            </div>
 
             <div class="bg-darkBg p-3 rounded-xl space-y-1.5 text-xs border border-slate-800">
                 <div class="flex justify-between"><span class="text-slate-400">Game:</span> <span id="invGame" class="font-bold text-white"></span></div>
@@ -258,8 +301,6 @@
     <footer class="bg-cardBg border-t border-neonBlue/20 text-center py-4 mt-8 text-xs text-slate-400">
         <p>&copy; 2026 Sancheszx Store. All rights reserved.</p>
     </footer>
-
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         const defaultData = [
             { id: 'ff', name: 'Free Fire', icon: 'fa-solid fa-fire', items: [{name: '70 Diamonds', price: 10000}, {name: '140 Diamonds', price: 20000}, {name: '355 Diamonds', price: 50000}] },
@@ -270,7 +311,14 @@
             { id: 'roblox', name: 'Roblox', icon: 'fa-solid fa-cube', items: [{name: '400 Robux', price: 65000}, {name: '800 Robux', price: 130000}] }
         ];
 
+        const defaultTestimonials = [
+            { name: "Rizky Gamer", text: "Mantap banget, top up ML cuma 1 detik langsung masuk!" },
+            { name: "Siti Nurhaliza", text: "Adminnya ramah banget, pakai DANA lancar jaya." }
+        ];
+
         let gamesData = JSON.parse(localStorage.getItem('gojoStoreData')) || defaultData;
+        let testimonialsData = JSON.parse(localStorage.getItem('sancheszxTestimonials')) || defaultTestimonials;
+        let orderHistory = JSON.parse(localStorage.getItem('sancheszxHistory')) || [];
         let isMaintenance = JSON.parse(localStorage.getItem('sancheszxMaintenance')) || false;
         let storeAnnouncement = JSON.parse(localStorage.getItem('sancheszxAnnouncement')) || { active: false, text: '' };
 
@@ -283,22 +331,126 @@
         function resetData() {
             if(confirm('Reset semua data ke pengaturan awal?')) {
                 gamesData = JSON.parse(JSON.stringify(defaultData));
+                testimonialsData = JSON.parse(JSON.stringify(defaultTestimonials));
                 localStorage.removeItem('gojoStoreData');
+                localStorage.removeItem('sancheszxTestimonials');
                 saveData();
+                renderTestimonials();
+                alert('Data berhasil direset!');
             }
         }
 
-        // FUNGSI PENGUMUMAN / NOTIFIKASI
-        function saveAnnouncement(isActive) {
-            const text = document.getElementById('inputAnnouncement').value.trim();
-            if (isActive && !text) {
-                alert('Teks pengumuman tidak boleh kosong jika ingin ditampilkan!');
+        function checkNickname() {
+            const userId = document.getElementById('inputUserId').value.trim();
+            const resultSpan = document.getElementById('nicknameResult');
+            if (!userId) {
+                alert('Masukkan User ID terlebih dahulu!');
                 return;
             }
+            const mockNames = ["Sancheszx [Pro]", "GojoSatoru99", "ShadowLegend", "VoidKing", "AkunValid#123"];
+            const randomName = mockNames[Math.abs(userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % mockNames.length];
+            resultSpan.innerText = `✓ Nickname: ${randomName} (Valid)`;
+        }
+
+        function calculateWinRate() {
+            const total = parseInt(document.getElementById('totalMatch').value);
+            const current = parseFloat(document.getElementById('currentWr').value);
+            const target = parseFloat(document.getElementById('targetWr').value);
+            const resultBox = document.getElementById('wrResult');
+
+            if (isNaN(total) || isNaN(current) || isNaN(target)) {
+                resultBox.innerHTML = "<span class='text-red-400'>Semua kolom harus diisi dengan benar!</span>";
+                return;
+            }
+
+            if (target >= 100 || target <= 0) {
+                resultBox.innerHTML = "<span class='text-red-400'>Target WR harus di antara 0% dan 100%!</span>";
+                return;
+            }
+
+            const currentWins = Math.round(total * (current / 100));
+            const requiredWins = Math.ceil((target * total - 100 * currentWins) / (100 - target));
+
+            if (requiredWins <= 0) {
+                resultBox.innerHTML = "<span class='text-emerald-400'>🎉 Kamu sudah mencapai atau melewati target Win Rate!</span>";
+            } else {
+                resultBox.innerHTML = `Kamu membutuhkan sekitar <strong class='text-neonBlue text-sm'>${requiredWins} kemenangan beruntun</strong> tanpa kekalahan untuk mencapai target ${target}%.`;
+            }
+        }
+
+        function renderTestimonials() {
+            const container = document.getElementById('testimonialContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            testimonialsData.forEach((t, idx) => {
+                container.innerHTML += `
+                    <div class="bg-darkBg/60 p-3 rounded-xl border border-slate-800 space-y-1 relative">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-neonBlue">${t.name}</span>
+                            <div class="text-yellow-400 text-[10px]"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <p class="text-[11px] text-slate-300">"${t.text}"</p>
+                        ${isAdminLoggedIn ? `<button onclick="deleteTestimonial(${idx})" class="absolute top-2 right-2 text-red-400 text-[10px] hover:text-red-300"><i class="fa-solid fa-trash"></i></button>` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function saveTestimonial() {
+            const name = document.getElementById('inputTestiName').value.trim();
+            const text = document.getElementById('inputTestiText').value.trim();
+            if (!name || !text) return alert('Nama dan ulasan wajib diisi!');
+            testimonialsData.push({ name, text });
+            localStorage.setItem('sancheszxTestimonials', JSON.stringify(testimonialsData));
+            document.getElementById('inputTestiName').value = '';
+            document.getElementById('inputTestiText').value = '';
+            renderTestimonials();
+            alert('Testimoni berhasil ditambahkan!');
+        }
+
+        function deleteTestimonial(idx) {
+            testimonialsData.splice(idx, 1);
+            localStorage.setItem('sancheszxTestimonials', JSON.stringify(testimonialsData));
+            renderTestimonials();
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyListContainer');
+            if (!container) return;
+            if (orderHistory.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">Belum ada riwayat transaksi tersimpan.</p>`;
+                return;
+            }
+            container.innerHTML = '';
+            orderHistory.forEach((h, idx) => {
+                container.innerHTML += `
+                    <div class="bg-darkBg p-3 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
+                        <div class="space-y-0.5">
+                            <div class="font-bold text-white">${h.game} - <span class="text-neonBlue">${h.item}</span></div>
+                            <div class="text-[10px] text-slate-400">ID: ${h.userId} | ${h.payment} (${h.price})</div>
+                            <div class="text-[9px] text-slate-500">${h.date}</div>
+                        </div>
+                        <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] rounded-lg font-semibold">Berhasil</span>
+                    </div>
+                `;
+            });
+        }
+
+        function clearHistory() {
+            if(confirm('Hapus semua riwayat transaksi?')) {
+                orderHistory = [];
+                localStorage.removeItem('sancheszxHistory');
+                renderHistory();
+            }
+        }
+
+        function saveAnnouncement(isActive) {
+            const text = document.getElementById('inputAnnouncement').value.trim();
+            if (isActive && !text) return alert('Teks pengumuman tidak boleh kosong!');
             storeAnnouncement = { active: isActive, text: text || storeAnnouncement.text };
             localStorage.setItem('sancheszxAnnouncement', JSON.stringify(storeAnnouncement));
             updateAnnouncementUI();
-            alert(isActive ? 'Pengumuman berhasil ditampilkan di web!' : 'Pengumuman disembunyikan.');
+            alert(isActive ? 'Pengumuman ditampilkan!' : 'Pengumuman disembunyikan.');
         }
 
         function updateAnnouncementUI() {
@@ -309,10 +461,9 @@
 
             if (inputField) inputField.value = storeAnnouncement.text;
             if (statusText) {
-                statusText.innerText = storeAnnouncement.active ? "Status: Ditampilkan di Web" : "Status: Sembunyi";
+                statusText.innerText = storeAnnouncement.active ? "Status: Ditampilkan" : "Status: Sembunyikan";
                 statusText.className = storeAnnouncement.active ? "text-xs font-bold text-green-400" : "text-xs text-slate-400";
             }
-
             if (banner && textDisplay) {
                 if (storeAnnouncement.active && storeAnnouncement.text) {
                     textDisplay.innerText = storeAnnouncement.text;
@@ -323,13 +474,12 @@
             }
         }
 
-        // FUNGSI MAINTENANCE
         function toggleMaintenance() {
             isMaintenance = !isMaintenance;
             localStorage.setItem('sancheszxMaintenance', JSON.stringify(isMaintenance));
             updateMaintenanceUI();
             checkMaintenanceMode();
-            alert(isMaintenance ? "Mode Maintenance diaktifkan!" : "Mode Maintenance dimatikan!");
+            alert(isMaintenance ? "Maintenance diaktifkan!" : "Maintenance dimatikan!");
         }
 
         function updateMaintenanceUI() {
@@ -339,12 +489,12 @@
                 if (isMaintenance) {
                     statusText.innerText = "Status: AKTIF (Web Ditutup)";
                     statusText.className = "text-xs font-bold text-red-400";
-                    btn.innerText = "Matikan Maintenance";
+                    btn.innerText = "Matikan";
                     btn.className = "px-4 py-2 bg-red-500 text-white font-bold text-xs rounded-xl shadow-lg transition hover:bg-red-400";
                 } else {
-                    statusText.innerText = "Status: Nonaktif (Web Normal)";
+                    statusText.innerText = "Status: Nonaktif (Normal)";
                     statusText.className = "text-xs font-bold text-green-400";
-                    btn.innerText = "Aktifkan Maintenance";
+                    btn.innerText = "Aktifkan";
                     btn.className = "px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400";
                 }
             }
@@ -373,29 +523,43 @@
                 switchTab('admin');
                 alert("Login Admin Berhasil!");
             } else if (pass !== null) {
-                alert("Password Salah! Akses ditolak.");
+                alert("Password Salah!");
             }
         }
 
         function switchTab(tab) {
             const shopSec = document.getElementById('shopSection');
+            const toolsSec = document.getElementById('toolsSection');
+            const historySec = document.getElementById('historySection');
             const adminSec = document.getElementById('adminSection');
             const navShop = document.getElementById('navShop');
+            const navTools = document.getElementById('navTools');
+            const navHistory = document.getElementById('navHistory');
             const navAdmin = document.getElementById('navAdmin');
+
+            shopSec.classList.add('hidden');
+            toolsSec.classList.add('hidden');
+            historySec.classList.add('hidden');
+            adminSec.classList.add('hidden');
+            navShop.className = navTools.className = navHistory.className = navAdmin.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
 
             if(tab === 'shop') {
                 shopSec.classList.remove('hidden');
-                adminSec.classList.add('hidden');
                 navShop.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition";
-                navAdmin.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
-            } else {
-                shopSec.classList.add('hidden');
+            } else if(tab === 'tools') {
+                toolsSec.classList.remove('hidden');
+                navTools.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition";
+            } else if(tab === 'history') {
+                historySec.classList.remove('hidden');
+                navHistory.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition";
+                renderHistory();
+            } else if(tab === 'admin') {
                 adminSec.classList.remove('hidden');
                 navAdmin.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonPurple bg-neonPurple/10 border border-neonPurple/40 transition";
-                navShop.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
                 renderAdmin();
                 updateMaintenanceUI();
                 updateAnnouncementUI();
+                renderTestimonials();
             }
         }
 
@@ -425,6 +589,7 @@
             document.getElementById('transactionCard').classList.remove('hidden');
             document.getElementById('selectedGameTitle').innerText = currentGame.name;
             document.getElementById('selectedGameIcon').innerHTML = `<i class="${currentGame.icon}"></i>`;
+            document.getElementById('nicknameResult').innerText = '';
 
             const nominalList = document.getElementById('nominalList');
             nominalList.innerHTML = '';
@@ -445,14 +610,14 @@
         function processCheckout() {
             const userId = document.getElementById('inputUserId').value.trim();
             if(!userId) {
-                alert('Silakan masukkan User ID / Server ID terlebih dahulu!');
+                alert('Silakan masukkan User ID terlebih dahulu!');
                 document.getElementById('inputUserId').focus();
                 return;
             }
 
             const selectedRadio = document.querySelector('input[name="nominal"]:checked');
             if(!selectedRadio) {
-                alert('Silakan pilih nominal top-up terlebih dahulu!');
+                alert('Silakan pilih nominal top-up!');
                 return;
             }
 
@@ -465,8 +630,13 @@
                 userId: userId,
                 item: selectedItem.name,
                 payment: paymentMethod,
-                price: 'Rp ' + selectedItem.price.toLocaleString('id-ID')
+                price: 'Rp ' + selectedItem.price.toLocaleString('id-ID'),
+                date: new Date().toLocaleString('id-ID')
             };
+
+            orderHistory.unshift(currentOrderData);
+            if(orderHistory.length > 20) orderHistory.pop();
+            localStorage.setItem('sancheszxHistory', JSON.stringify(orderHistory));
 
             document.getElementById('invGame').innerText = currentOrderData.game;
             document.getElementById('invUser').innerText = currentOrderData.userId;
@@ -504,7 +674,7 @@
         }
 
         function sendToWhatsApp() {
-            let adminPhone = "6285603088228"; // Default GoPay / QRIS
+            let adminPhone = "6285603088228"; 
             if (currentOrderData.payment === "DANA") {
                 adminPhone = "6283878003915";
             }
@@ -558,6 +728,7 @@
                     </div>
                 `;
             });
+            renderTestimonials();
         }
 
         function saveGame() {
@@ -577,7 +748,7 @@
             const itemName = document.getElementById('inputItemName').value.trim();
             const itemPrice = parseInt(document.getElementById('inputItemPrice').value);
 
-            if(!itemName || isNaN(itemPrice)) return alert('Nama item dan harga harus diisi dengan benar!');
+            if(!itemName || isNaN(itemPrice)) return alert('Nama item dan harga harus diisi benar!');
 
             const game = gamesData.find(g => g.id === targetId);
             if(game) {
@@ -606,6 +777,7 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             renderShop();
+            renderTestimonials();
             checkMaintenanceMode();
             updateAnnouncementUI();
         });
