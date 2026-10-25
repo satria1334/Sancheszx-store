@@ -58,7 +58,6 @@
             <button onclick="tryOpenAdmin()" id="navAdmin" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-lock mr-1"></i> Admin</button>
         </div>
     </nav>
-
     <!-- MAIN CONTAINER -->
     <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl space-y-6">
 
@@ -123,7 +122,7 @@
             </div>
         </section>
 
-        <!-- ADMIN PANEL (DIKUNCI PASSWORD) -->
+        <!-- ADMIN PANEL (KUNCI PASSWORD: 1234) -->
         <section id="adminSection" class="hidden space-y-5">
             <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] space-y-3">
                 <div class="flex justify-between items-center">
@@ -175,24 +174,40 @@
 
     </main>
 
-    <!-- INVOICE MODAL -->
+    <!-- INVOICE & QRIS PAYMENT MODAL -->
     <div id="invoiceModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg">
             <div class="text-center space-y-1">
                 <div class="w-12 h-12 mx-auto rounded-full bg-neonBlue/20 text-neonBlue flex items-center justify-center text-xl font-bold mb-2">
-                    <i class="fa-solid fa-check"></i>
+                    <i class="fa-solid fa-qrcode"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white">Transaksi Berhasil!</h3>
-                <p class="text-xs text-slate-400">Pesanan Anda sedang diproses secara instan.</p>
+                <h3 class="text-lg font-bold text-white">Selesaikan Pembayaran</h3>
+                <p class="text-xs text-slate-400">Scan QRIS di bawah atau transfer sesuai metode.</p>
             </div>
-            <div class="bg-darkBg p-3 rounded-xl space-y-2 text-xs border border-slate-800">
+
+            <div class="bg-darkBg p-3 rounded-xl text-center space-y-2 border border-slate-800">
+                <div class="bg-white p-2 rounded-lg inline-block">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=GojoStore-Payment" alt="QRIS Code" class="w-28 h-28 mx-auto">
+                </div>
+                <p class="text-[10px] text-slate-400">Scan pakai GoPay, DANA, OVO, BCA, atau m-Banking.</p>
+            </div>
+
+            <div class="bg-darkBg p-3 rounded-xl space-y-1.5 text-xs border border-slate-800">
                 <div class="flex justify-between"><span class="text-slate-400">Game:</span> <span id="invGame" class="font-bold text-white"></span></div>
                 <div class="flex justify-between"><span class="text-slate-400">User ID:</span> <span id="invUser" class="font-bold text-white"></span></div>
                 <div class="flex justify-between"><span class="text-slate-400">Item:</span> <span id="invItem" class="font-bold text-neonBlue"></span></div>
-                <div class="flex justify-between"><span class="text-slate-400">Pembayaran:</span> <span id="invPay" class="font-bold text-white"></span></div>
-                <div class="flex justify-between border-t border-slate-800 pt-2"><span class="text-slate-400">Total Harga:</span> <span id="invPrice" class="font-extrabold text-neonBlue"></span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Metode:</span> <span id="invPay" class="font-bold text-white"></span></div>
+                <div class="flex justify-between border-t border-slate-800 pt-2"><span class="text-slate-400">Total:</span> <span id="invPrice" class="font-extrabold text-neonBlue"></span></div>
             </div>
-            <button onclick="closeInvoice()" class="w-full py-2.5 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Tutup & Selesai</button>
+
+            <div class="space-y-2">
+                <button onclick="sendToWhatsApp()" class="w-full py-2.5 bg-green-500 hover:bg-green-600 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp mr-1.5 text-base"></i> Konfirmasi ke WhatsApp Admin
+                </button>
+                <button onclick="closeInvoice()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-xl transition">
+                    Tutup
+                </button>
+            </div>
         </div>
     </div>
 
@@ -225,7 +240,6 @@
             }
         }
 
-        // PASSWORD ADMIN (Default: 1234)
         let isAdminLoggedIn = false;
         function tryOpenAdmin() {
             if (isAdminLoggedIn) {
@@ -279,6 +293,8 @@
         }
 
         let currentGame = null;
+        let currentOrderData = {};
+
         function selectGame(gameId) {
             currentGame = gamesData.find(g => g.id === gameId);
             if(!currentGame) return;
@@ -321,13 +337,37 @@
             const selectedItem = currentGame.items[itemIndex];
             const paymentMethod = document.getElementById('selectPayment').value;
 
-            document.getElementById('invGame').innerText = currentGame.name;
-            document.getElementById('invUser').innerText = userId;
-            document.getElementById('invItem').innerText = selectedItem.name;
-            document.getElementById('invPay').innerText = paymentMethod;
-            document.getElementById('invPrice').innerText = 'Rp ' + selectedItem.price.toLocaleString('id-ID');
+            currentOrderData = {
+                game: currentGame.name,
+                userId: userId,
+                item: selectedItem.name,
+                payment: paymentMethod,
+                price: 'Rp ' + selectedItem.price.toLocaleString('id-ID')
+            };
+
+            document.getElementById('invGame').innerText = currentOrderData.game;
+            document.getElementById('invUser').innerText = currentOrderData.userId;
+            document.getElementById('invItem').innerText = currentOrderData.item;
+            document.getElementById('invPay').innerText = currentOrderData.payment;
+            document.getElementById('invPrice').innerText = currentOrderData.price;
 
             document.getElementById('invoiceModal').classList.remove('hidden');
+        }
+
+        function sendToWhatsApp() {
+            // UBAH NOMOR DI BAWAH DENGAN NOMOR WHATSAPP ANDA (Awali dengan 62)
+            const adminPhone = "6281234567890"; 
+            
+            const message = `Halo Admin GojoStore, saya ingin konfirmasi pembayaran top-up:\n\n` +
+                            `🎮 Game: ${currentOrderData.game}\n` +
+                            `🆔 User ID: ${currentOrderData.userId}\n` +
+                            `💎 Item: ${currentOrderData.item}\n` +
+                            `💳 Pembayaran: ${currentOrderData.payment}\n` +
+                            `💰 Total: ${currentOrderData.price}\n\n` +
+                            `Berikut bukti transfernya. Mohon diproses ya!`;
+
+            const whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         function closeInvoice() {
