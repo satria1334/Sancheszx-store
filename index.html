@@ -53,20 +53,26 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- LAYAR PEMBERITAHUAN MAINTENANCE (MUNCUL OTOMATIS JIKA AKTIF) -->
+    <!-- LAYAR PEMBERITAHUAN MAINTENANCE -->
     <div id="maintenanceOverlay" class="hidden fixed inset-0 bg-darkBg/95 z-[100] flex flex-col items-center justify-center p-6 text-center space-y-4 backdrop-blur-md">
         <div class="w-16 h-16 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-bounce">
             <i class="fa-solid fa-screwdriver-wrench"></i>
         </div>
         <h1 class="text-2xl md:text-3xl font-extrabold text-white">WEB SEDANG MAINTENANCE</h1>
-        <p class="text-xs md:text-sm text-slate-400 max-w-md">Sancheszx Store sedang dalam perbaikan dan peningkatan sistem. Mohon bersabar ya, kami akan segera kembali!</p>
-        <button onclick="tryOpenAdmin()" class="px-5 py-2.5 bg-cardBg border border-yellow-500/50 text-yellow-400 rounded-xl text-xs font-bold hover:bg-yellow-500/10 transition shadow-lg">
+        <p class="text-xs md:text-sm text-slate-400 max-w-md">Sancheszx Store sedang dalam perbaikan sistem. Mohon bersabar ya!</p>
+        <button onclick="tryOpenAdmin()" class="px-5 py-2.5 bg-cardBg border border-yellow-500/50 text-yellow-400 rounded-xl text-xs font-bold hover:bg-yellow-500/15 transition shadow-lg">
             <i class="fa-solid fa-lock mr-1"></i> Login Admin untuk Buka Web
         </button>
     </div>
 
+    <!-- BANNER NOTIFIKASI / PENGUMUMAN DI ATAS WEB -->
+    <div id="announcementBanner" class="hidden bg-gradient-to-r from-amber-500/20 via-yellow-500/30 to-amber-500/20 border-b border-yellow-500/40 px-4 py-2 text-center text-xs text-yellow-300 font-medium flex items-center justify-center space-x-2 z-40">
+        <i class="fa-solid fa-bullhorn animate-bounce"></i>
+        <span id="announcementTextDisplay"></span>
+    </div>
+
     <!-- NAVBAR -->
-    <nav class="bg-cardBg/90 backdrop-blur-md border-b border-neonBlue/30 sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
+    <nav class="bg-cardBg/90 backdrop-blur-md border-b border-neonBlue/30 sticky top-0 z-35 px-4 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-2">
             <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon">
                 <i class="fa-solid fa-bolt text-darkBg font-bold text-sm"></i>
@@ -147,14 +153,30 @@
                     <h2 class="text-base font-bold text-neonPurple"><i class="fa-solid fa-code mr-2"></i> Developer Control Panel</h2>
                     <button onclick="resetData()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Reset Default</button>
                 </div>
-                <p class="text-xs text-slate-400">Edit daftar game, tambah nominal, atau atur mode maintenance dari panel ini.</p>
+                <p class="text-xs text-slate-400">Atur pengumuman, mode perbaikan, game, dan harga langsung dari panel ini.</p>
             </div>
 
-            <!-- KONTROL MAINTENANCE DI PANEL ADMIN -->
+            <!-- FITUR PENGATURAN NOTIFIKASI / PENGUMUMAN WEB -->
+            <div class="bg-cardBg p-5 rounded-2xl border border-cyan-500/40 space-y-3">
+                <h3 class="font-bold text-sm text-neonBlue"><i class="fa-solid fa-bullhorn mr-2"></i> Pengaturan Notifikasi / Pengumuman Web</h3>
+                <p class="text-xs text-slate-400">Tulis pemberitahuan (misal: <em>"QRIS sedang gangguan, silakan gunakan DANA/GoPay"</em>) yang akan tampil di atas web.</p>
+                <div class="space-y-2">
+                    <input id="inputAnnouncement" type="text" placeholder="Tulis pesan pengumuman di sini..." class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-1">
+                        <span id="announcementStatusText" class="text-xs text-slate-300">Status: Sembunyi</span>
+                        <div class="flex space-x-2">
+                            <button onclick="saveAnnouncement(true)" class="px-3 py-1.5 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Tampilkan di Web</button>
+                            <button onclick="saveAnnouncement(false)" class="px-3 py-1.5 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl hover:bg-slate-700 transition">Sembunyikan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PENGATURAN MAINTENANCE -->
             <div class="bg-cardBg p-5 rounded-2xl border border-yellow-500/40 space-y-3">
-                <h3 class="font-bold text-sm text-yellow-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Pengaturan Mode Maintenance</h3>
-                <p class="text-xs text-slate-400">Nyalakan mode ini jika Anda sedang memperbaiki website atau mengedit data agar pengunjung melihat halaman perbaikan.</p>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
+                <h3 class="font-bold text-sm text-yellow-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Mode Maintenance (Perbaikan)</h3>
+                <p class="text-xs text-slate-400">Nyalakan mode ini jika web sedang diperbaiki agar pengunjung melihat halaman perbaikan.</p>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1">
                     <span id="maintenanceStatusText" class="text-xs font-bold text-white">Status: Nonaktif</span>
                     <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400">Aktifkan Maintenance</button>
                 </div>
@@ -250,6 +272,7 @@
 
         let gamesData = JSON.parse(localStorage.getItem('gojoStoreData')) || defaultData;
         let isMaintenance = JSON.parse(localStorage.getItem('sancheszxMaintenance')) || false;
+        let storeAnnouncement = JSON.parse(localStorage.getItem('sancheszxAnnouncement')) || { active: false, text: '' };
 
         function saveData() {
             localStorage.setItem('gojoStoreData', JSON.stringify(gamesData));
@@ -265,13 +288,48 @@
             }
         }
 
-        // FUNGSI TOGGLE MAINTENANCE
+        // FUNGSI PENGUMUMAN / NOTIFIKASI
+        function saveAnnouncement(isActive) {
+            const text = document.getElementById('inputAnnouncement').value.trim();
+            if (isActive && !text) {
+                alert('Teks pengumuman tidak boleh kosong jika ingin ditampilkan!');
+                return;
+            }
+            storeAnnouncement = { active: isActive, text: text || storeAnnouncement.text };
+            localStorage.setItem('sancheszxAnnouncement', JSON.stringify(storeAnnouncement));
+            updateAnnouncementUI();
+            alert(isActive ? 'Pengumuman berhasil ditampilkan di web!' : 'Pengumuman disembunyikan.');
+        }
+
+        function updateAnnouncementUI() {
+            const banner = document.getElementById('announcementBanner');
+            const textDisplay = document.getElementById('announcementTextDisplay');
+            const statusText = document.getElementById('announcementStatusText');
+            const inputField = document.getElementById('inputAnnouncement');
+
+            if (inputField) inputField.value = storeAnnouncement.text;
+            if (statusText) {
+                statusText.innerText = storeAnnouncement.active ? "Status: Ditampilkan di Web" : "Status: Sembunyi";
+                statusText.className = storeAnnouncement.active ? "text-xs font-bold text-green-400" : "text-xs text-slate-400";
+            }
+
+            if (banner && textDisplay) {
+                if (storeAnnouncement.active && storeAnnouncement.text) {
+                    textDisplay.innerText = storeAnnouncement.text;
+                    banner.classList.remove('hidden');
+                } else {
+                    banner.classList.add('hidden');
+                }
+            }
+        }
+
+        // FUNGSI MAINTENANCE
         function toggleMaintenance() {
             isMaintenance = !isMaintenance;
             localStorage.setItem('sancheszxMaintenance', JSON.stringify(isMaintenance));
             updateMaintenanceUI();
             checkMaintenanceMode();
-            alert(isMaintenance ? "Mode Maintenance diaktifkan! Pengunjung luar akan melihat halaman perbaikan." : "Mode Maintenance dimatikan! Web kembali normal.");
+            alert(isMaintenance ? "Mode Maintenance diaktifkan!" : "Mode Maintenance dimatikan!");
         }
 
         function updateMaintenanceUI() {
@@ -279,7 +337,7 @@
             const btn = document.getElementById('maintenanceBtn');
             if (statusText && btn) {
                 if (isMaintenance) {
-                    statusText.innerText = "Status: AKTIF (Web Ditutup untuk Pengunjung)";
+                    statusText.innerText = "Status: AKTIF (Web Ditutup)";
                     statusText.className = "text-xs font-bold text-red-400";
                     btn.innerText = "Matikan Maintenance";
                     btn.className = "px-4 py-2 bg-red-500 text-white font-bold text-xs rounded-xl shadow-lg transition hover:bg-red-400";
@@ -311,7 +369,7 @@
             let pass = prompt("Masukkan Password Developer/Admin:");
             if (pass === "sancheszx357") {
                 isAdminLoggedIn = true;
-                checkMaintenanceMode(); // Sembunyikan layar maintenance jika admin masuk
+                checkMaintenanceMode();
                 switchTab('admin');
                 alert("Login Admin Berhasil!");
             } else if (pass !== null) {
@@ -337,6 +395,7 @@
                 navShop.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
                 renderAdmin();
                 updateMaintenanceUI();
+                updateAnnouncementUI();
             }
         }
 
@@ -548,6 +607,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             renderShop();
             checkMaintenanceMode();
+            updateAnnouncementUI();
         });
     </script>
 </body>
