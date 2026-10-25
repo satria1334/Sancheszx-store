@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sancheszx Store - Top Up Games Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Sancheszx Store - Satoru Gojo Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -12,23 +12,15 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#090d16',
-                        cardBg: '#131b2e',
-                        neonBlue: '#00f0ff',
-                        neonPurple: '#a855f7',
+                        darkBg: '#030712',
+                        cardBg: '#0b1329',
+                        neonBlue: '#00f2fe',
+                        neonPurple: '#4facfe',
                     },
                     boxShadow: {
-                        'neon': '0 0 15px rgba(0, 240, 255, 0.5)',
-                        'neon-lg': '0 0 30px rgba(0, 240, 255, 0.8)',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-6px)' },
-                        }
-                    },
-                    animation: {
-                        'float': 'float 3s ease-in-out infinite',
+                        'neon': '0 0 20px rgba(0, 242, 254, 0.4)',
+                        'neon-lg': '0 0 40px rgba(0, 242, 254, 0.6)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
                     }
                 }
             }
@@ -36,105 +28,126 @@
     </script>
     <style>
         body { 
-            font-family: 'Poppins', sans-serif; 
-            background: linear-gradient(to bottom, rgba(9, 13, 22, 0.9), rgba(9, 13, 22, 0.95)), 
-                        url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=1200&auto=format&fit=crop&q=80');
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.85), rgba(3, 7, 18, 0.95)), 
+                        url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1600&auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #f8fafc; 
+            min-height: 100vh;
         }
-        .neon-border { border: 1px solid rgba(0, 240, 255, 0.4); }
-        .neon-border:focus, .neon-border:hover { border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #090d16; }
-        ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
+        .glass-card {
+            background: rgba(11, 19, 41, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+        }
+        .neon-input {
+            background: rgba(3, 7, 18, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .neon-input:focus {
+            border-color: #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            outline: none;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #00f2fe; border-radius: 3px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="flex flex-col justify-between">
 
     <!-- MAINTENANCE OVERLAY -->
-    <div id="maintenanceOverlay" class="hidden fixed inset-0 bg-darkBg/95 z-[100] flex flex-col items-center justify-center p-6 text-center space-y-4 backdrop-blur-md">
-        <div class="w-16 h-16 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-bounce">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
+    <div id="maintenanceOverlay" class="hidden fixed inset-0 bg-[#030712]/95 z-[100] flex flex-col items-center justify-center p-6 text-center space-y-4 backdrop-blur-xl">
+        <div class="w-20 h-20 rounded-3xl bg-cyan-500/10 border border-cyan-500/30 text-neonBlue flex items-center justify-center text-3xl shadow-neon animate-pulse">
+            <i class="fa-solid fa-eye"></i>
         </div>
-        <h1 class="text-2xl md:text-3xl font-extrabold text-white">WEB SEDANG MAINTENANCE</h1>
-        <p class="text-xs md:text-sm text-slate-400 max-w-md">Sancheszx Store sedang dalam perbaikan sistem. Mohon bersabar ya!</p>
-        <button onclick="tryOpenAdmin()" class="px-5 py-2.5 bg-cardBg border border-yellow-500/50 text-yellow-400 rounded-xl text-xs font-bold hover:bg-yellow-500/15 transition shadow-lg">
-            <i class="fa-solid fa-lock mr-1"></i> Login Admin untuk Buka Web
+        <h1 class="text-2xl md:text-3xl font-black text-white tracking-wider">EXPANSION DOMAIN: MAINTENANCE</h1>
+        <p class="text-xs md:text-sm text-slate-400 max-w-sm">Sancheszx Store sedang memperkuat sistem server. Mohon tunggu sebentar!</p>
+        <button onclick="tryOpenAdmin()" class="px-6 py-2.5 glass-card border-neonBlue/40 text-neonBlue rounded-2xl text-xs font-bold hover:bg-neonBlue/10 transition shadow-neon">
+            <i class="fa-solid fa-lock mr-1.5"></i> Login Admin
         </button>
     </div>
 
     <!-- BANNER PENGUMUMAN -->
-    <div id="announcementBanner" class="hidden bg-gradient-to-r from-amber-500/20 via-yellow-500/30 to-amber-500/20 border-b border-yellow-500/40 px-4 py-2 text-center text-xs text-yellow-300 font-medium flex items-center justify-center space-x-2 z-40">
-        <i class="fa-solid fa-bullhorn animate-bounce"></i>
+    <div id="announcementBanner" class="hidden bg-gradient-to-r from-cyan-500/10 via-blue-500/20 to-cyan-500/10 border-b border-cyan-500/30 px-4 py-2.5 text-center text-xs text-cyan-300 font-semibold flex items-center justify-center space-x-2 z-40">
+        <i class="fa-solid fa-bolt animate-bounce text-neonBlue"></i>
         <span id="announcementTextDisplay"></span>
     </div>
 
     <!-- NAVBAR -->
-    <nav class="bg-cardBg/90 backdrop-blur-md border-b border-neonBlue/30 sticky top-0 z-35 px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon">
-                <i class="fa-solid fa-bolt text-darkBg font-bold text-sm"></i>
+    <nav class="glass-card border-b border-white/10 sticky top-0 z-30 px-4 py-3.5 flex justify-between items-center shadow-glass">
+        <div class="flex items-center space-x-2.5 cursor-pointer" onclick="switchTab('shop')">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon">
+                <i class="fa-solid fa-bolt text-darkBg font-black text-base"></i>
             </div>
-            <span class="text-base font-extrabold tracking-wider bg-gradient-to-r from-neonBlue to-white bg-clip-text text-transparent">SANCHESZX<span class="text-neonBlue">STORE</span></span>
+            <span class="text-base font-black tracking-wider bg-gradient-to-r from-neonBlue to-white bg-clip-text text-transparent">SANCHESZX<span class="text-neonBlue">.</span></span>
         </div>
-        <div class="flex items-center space-x-2">
-            <button onclick="switchTab('shop')" id="navShop" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition">Shop</button>
-            <button onclick="switchTab('tools')" id="navTools" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-calculator mr-1"></i> Tools WR</button>
-            <button onclick="switchTab('history')" id="navHistory" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Riwayat</button>
-            <button onclick="tryOpenAdmin()" id="navAdmin" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-lock mr-1"></i> Admin</button>
+        <div class="flex items-center space-x-1.5 md:space-x-2">
+            <button onclick="switchTab('shop')" id="navShop" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/30 transition shadow-neon">Shop</button>
+            <button onclick="switchTab('tools')" id="navTools" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-calculator mr-1"></i> WR</button>
+            <button onclick="switchTab('history')" id="navHistory" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Riwayat</button>
+            <button onclick="tryOpenAdmin()" id="navAdmin" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-lock mr-1"></i> Admin</button>
         </div>
     </nav>
     <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl space-y-6">
 
         <!-- SHOP SECTION -->
         <section id="shopSection" class="space-y-6">
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/60 via-cardBg to-purple-900/60 p-6 border border-neonBlue/40 shadow-neon flex flex-col md:flex-row items-center justify-between">
+            <!-- HERO BANNER GOJO THEME -->
+            <div class="relative overflow-hidden rounded-3xl glass-card p-6 md:p-8 border border-neonBlue/40 shadow-neon-lg flex flex-col md:flex-row items-center justify-between">
+                <div class="absolute -right-10 -top-10 w-48 h-48 bg-neonBlue/20 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="space-y-3 max-w-md z-10 text-center md:text-left">
-                    <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40">Sancheszx Store Official</span>
-                    <h1 class="text-2xl md:text-4xl font-extrabold leading-tight">Top Up Game Cepat, Aman & <span class="text-neonBlue drop-shadow-[0_0_10px_rgba(0,240,255,0.7)]">Tanpa Batas</span></h1>
-                    <p class="text-slate-300 text-xs md:text-sm">Proses instan 24 jam dengan pelayanan terbaik!</p>
+                    <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40 shadow-neon">"Satoru Gojo Style" Store</span>
+                    <h1 class="text-2xl md:text-4xl font-black tracking-tight leading-tight text-white">Top Up Game Terkuat & <span class="bg-gradient-to-r from-neonBlue to-neonPurple bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(0,242,254,0.6)]">Tanpa Batas</span></h1>
+                    <p class="text-slate-300 text-xs md:text-sm">Proses kilat 24 jam dengan pelayanan sekelas Penyihir Tingkat Khusus!</p>
                 </div>
-                <div class="mt-4 md:mt-0 relative">
-                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border-2 border-neonBlue shadow-neon-lg relative animate-float bg-darkBg flex items-center justify-center">
-                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=80" alt="Anime Theme" class="w-full h-full object-cover filter brightness-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-transparent to-transparent flex items-end justify-center pb-1">
-                            <span class="text-[9px] font-extrabold text-neonBlue tracking-widest">SANCHESZX</span>
+                <div class="mt-4 md:mt-0 relative z-10">
+                    <div class="w-32 h-32 md:w-36 md:h-36 rounded-2xl overflow-hidden border-2 border-neonBlue shadow-neon relative bg-darkBg flex items-center justify-center group">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop&q=80" alt="Gojo Theme" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-transparent to-transparent flex items-end justify-center pb-2">
+                            <span class="text-[9px] font-black text-neonBlue tracking-widest">GOJO SATORU</span>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- GRID GAME -->
             <div>
-                <h2 class="text-lg font-bold mb-3 flex items-center"><i class="fa-solid fa-gamepad text-neonBlue mr-2"></i> Pilih Game</h2>
+                <h2 class="text-sm font-bold mb-3 flex items-center text-slate-200 uppercase tracking-wider"><i class="fa-solid fa-gamepad text-neonBlue mr-2"></i> Pilih Game</h2>
                 <div id="gameGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
             </div>
 
             <!-- TRANSACTION CARD -->
-            <div id="transactionCard" class="hidden bg-cardBg rounded-2xl p-5 border border-neonBlue/40 shadow-neon space-y-5">
-                <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
-                    <div id="selectedGameIcon" class="w-10 h-10 rounded-xl bg-neonBlue/20 flex items-center justify-center text-neonBlue text-xl font-bold"></div>
+            <div id="transactionCard" class="hidden glass-card rounded-3xl p-5 md:p-6 border border-neonBlue/40 shadow-neon space-y-5">
+                <div class="flex items-center space-x-3.5 border-b border-white/10 pb-4">
+                    <div id="selectedGameIcon" class="w-12 h-12 rounded-2xl bg-neonBlue/10 border border-neonBlue/30 flex items-center justify-center text-neonBlue text-xl font-bold shadow-neon"></div>
                     <div>
-                        <h3 id="selectedGameTitle" class="text-lg font-bold"></h3>
-                        <p class="text-[11px] text-slate-400">Masukkan ID & Cek Nickname</p>
+                        <h3 id="selectedGameTitle" class="text-base font-bold text-white"></h3>
+                        <p class="text-[11px] text-slate-400">Masukkan ID & pilih metode pembayaran</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="space-y-3">
+                    <div class="space-y-3.5">
                         <div>
-                            <label class="block text-xs font-medium mb-1 text-slate-300">User ID / Server ID</label>
+                            <label class="block text-xs font-medium mb-1.5 text-slate-300">User ID & Server ID</label>
                             <div class="flex space-x-2">
-                                <input id="inputUserId" type="text" placeholder="Contoh: 12345678 (1234)" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                                <button onclick="checkNickname()" class="px-3 py-2 bg-neonBlue/20 border border-neonBlue text-neonBlue text-xs font-bold rounded-xl hover:bg-neonBlue/30 transition">Cek</button>
+                                <input id="inputUserId" type="text" placeholder="Contoh: 12345678 (1234)" class="w-full neon-input rounded-2xl px-3.5 py-2.5 text-sm text-white">
+                                <button onclick="checkNickname()" class="px-4 py-2.5 bg-neonBlue/20 border border-neonBlue text-neonBlue text-xs font-bold rounded-2xl hover:bg-neonBlue/30 transition shadow-neon">Cek</button>
                             </div>
                             <span id="nicknameResult" class="text-[10px] text-emerald-400 mt-1 block font-semibold"></span>
                         </div>
                         <div>
-                            <label class="block text-xs font-medium mb-1 text-slate-300">Metode Pembayaran</label>
-                            <select id="selectPayment" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                                <option value="QRIS">1. QRIS (Satu Untuk Semua)</option>
+                            <label class="block text-xs font-medium mb-1.5 text-slate-300">Metode Pembayaran</label>
+                            <select id="selectPayment" class="w-full neon-input rounded-2xl px-3.5 py-2.5 text-sm text-white">
+                                <option value="QRIS">1. QRIS (Scan Semua E-Wallet & Bank)</option>
                                 <option value="GoPay">2. GoPay (6285603088228)</option>
                                 <option value="DANA">3. DANA (6283878003915)</option>
                             </select>
@@ -142,121 +155,126 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium mb-1 text-slate-300">Pilih Nominal</label>
-                        <div id="nominalList" class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1"></div>
+                        <label class="block text-xs font-medium mb-1.5 text-slate-300">Pilih Nominal Top-Up</label>
+                        <div id="nominalList" class="grid grid-cols-2 gap-2 max-h-52 overflow-y-auto pr-1"></div>
                     </div>
                 </div>
 
-                <button onclick="processCheckout()" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonBlue to-blue-600 text-darkBg font-extrabold text-sm shadow-neon hover:opacity-90 transition">
-                    BAYAR SEKARANG
+                <button onclick="processCheckout()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-neonBlue to-neonPurple text-darkBg font-black text-sm shadow-neon-lg hover:opacity-95 transition transform active:scale-[0.99]">
+                    LANJUTKAN PEMBAYARAN
                 </button>
             </div>
 
-            <!-- TESTIMONIALS SECTION -->
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 space-y-3">
-                <h3 class="font-bold text-sm flex items-center text-neonBlue"><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Testimoni Pelanggan Setia</h3>
+            <!-- TESTIMONIALS -->
+            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                <h3 class="font-bold text-xs uppercase tracking-wider flex items-center text-slate-300"><i class="fa-solid fa-star text-amber-400 mr-2"></i> Ulasan Pelanggan</h3>
                 <div id="testimonialContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
             </div>
         </section>
 
-        <!-- TOOLS / WIN RATE CALCULATOR SECTION -->
+        <!-- TOOLS / WIN RATE CALCULATOR -->
         <section id="toolsSection" class="hidden space-y-5">
-            <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/40 shadow-neon space-y-4 max-w-lg mx-auto">
-                <h2 class="text-base font-bold text-neonBlue text-center"><i class="fa-solid fa-calculator mr-2"></i> Kalkulator Win Rate ML</h2>
-                <p class="text-xs text-slate-400 text-center">Hitung jumlah kemenangan beruntun yang kamu butuhkan untuk target Win Rate!</p>
-                <div class="space-y-3">
+            <div class="glass-card p-6 rounded-3xl border border-neonBlue/40 shadow-neon space-y-4 max-w-md mx-auto">
+                <div class="text-center space-y-1">
+                    <div class="w-12 h-12 mx-auto rounded-2xl bg-neonBlue/10 border border-neonBlue/30 text-neonBlue flex items-center justify-center text-xl shadow-neon mb-2">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h2 class="text-base font-black text-white">Kalkulator Win Rate ML</h2>
+                    <p class="text-xs text-slate-400">Hitung target win rate kamu dengan mudah.</p>
+                </div>
+                <div class="space-y-3 pt-2">
                     <div>
                         <label class="block text-xs text-slate-300 mb-1">Total Match Saat Ini</label>
-                        <input id="totalMatch" type="number" placeholder="Contoh: 500" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                        <input id="totalMatch" type="number" placeholder="500" class="w-full neon-input rounded-2xl px-3.5 py-2.5 text-sm text-white">
                     </div>
                     <div>
                         <label class="block text-xs text-slate-300 mb-1">Win Rate Saat Ini (%)</label>
-                        <input id="currentWr" type="number" step="0.1" placeholder="Contoh: 55.5" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                        <input id="currentWr" type="number" step="0.1" placeholder="55.5" class="w-full neon-input rounded-2xl px-3.5 py-2.5 text-sm text-white">
                     </div>
                     <div>
                         <label class="block text-xs text-slate-300 mb-1">Target Win Rate (%)</label>
-                        <input id="targetWr" type="number" step="0.1" placeholder="Contoh: 60.0" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                        <input id="targetWr" type="number" step="0.1" placeholder="60.0" class="w-full neon-input rounded-2xl px-3.5 py-2.5 text-sm text-white">
                     </div>
-                    <button onclick="calculateWinRate()" class="w-full py-2.5 bg-neonBlue text-darkBg font-bold text-sm rounded-xl shadow-neon hover:bg-cyan-400 transition">Hitung Sekarang</button>
-                    <div id="wrResult" class="bg-darkBg p-3 rounded-xl border border-slate-800 text-xs text-center text-slate-300 font-semibold"></div>
+                    <button onclick="calculateWinRate()" class="w-full py-3 bg-gradient-to-r from-neonBlue to-neonPurple text-darkBg font-black text-xs rounded-2xl shadow-neon hover:opacity-95 transition">HITUNG TARGET</button>
+                    <div id="wrResult" class="bg-darkBg/90 p-3.5 rounded-2xl border border-white/10 text-xs text-center text-slate-300 font-semibold"></div>
                 </div>
             </div>
         </section>
 
         <!-- HISTORY SECTION -->
         <section id="historySection" class="hidden space-y-4">
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 space-y-3">
+            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
                 <div class="flex justify-between items-center">
-                    <h2 class="text-base font-bold text-white"><i class="fa-solid fa-clock-rotate-left text-neonBlue mr-2"></i> Riwayat Transaksi</h2>
-                    <button onclick="clearHistory()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Hapus Riwayat</button>
+                    <h2 class="text-sm font-bold text-white flex items-center"><i class="fa-solid fa-clock-rotate-left text-neonBlue mr-2"></i> Riwayat Transaksi</h2>
+                    <button onclick="clearHistory()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-xl hover:bg-red-500/30 transition">Hapus Riwayat</button>
                 </div>
                 <div id="historyListContainer" class="space-y-2"></div>
             </div>
         </section>
         <!-- ADMIN PANEL -->
         <section id="adminSection" class="hidden space-y-5">
-            <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] space-y-3">
+            <div class="glass-card p-5 rounded-3xl border border-neonPurple/40 shadow-[0_0_20px_rgba(79,172,254,0.2)] space-y-2">
                 <div class="flex justify-between items-center">
-                    <h2 class="text-base font-bold text-neonPurple"><i class="fa-solid fa-code mr-2"></i> Developer Control Panel</h2>
-                    <button onclick="resetData()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Reset Default</button>
+                    <h2 class="text-base font-black text-neonPurple"><i class="fa-solid fa-shield-halved mr-2"></i> Admin Control Panel</h2>
+                    <button onclick="resetData()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-xl hover:bg-red-500/30 transition">Reset Default</button>
                 </div>
-                <p class="text-xs text-slate-400">Kelola web, testimoni, pengumuman, dan maintenance langsung dari panel ini.</p>
+                <p class="text-xs text-slate-400">Pusat kontrol pengaturan toko, produk, pengumuman, dan maintenance.</p>
             </div>
 
             <!-- KELOLA TESTIMONI -->
-            <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/30 space-y-3">
-                <h3 class="font-bold text-sm text-neonPurple"><i class="fa-solid fa-star mr-2"></i> Tambah Testimoni Baru</h3>
+            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                <h3 class="font-bold text-xs text-neonPurple uppercase tracking-wider"><i class="fa-solid fa-star mr-1.5"></i> Tambah Ulasan / Testimoni</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <input id="inputTestiName" type="text" placeholder="Nama Pelanggan" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                    <input id="inputTestiText" type="text" placeholder="Ulasan (Mantap, proses cepat!)" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                    <input id="inputTestiName" type="text" placeholder="Nama Pelanggan" class="neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                    <input id="inputTestiText" type="text" placeholder="Isi Ulasan Singkat" class="neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
                 </div>
-                <button onclick="saveTestimonial()" class="w-full py-2 bg-neonPurple text-white font-bold text-xs rounded-xl hover:bg-purple-600 transition">Tambah Testimoni</button>
+                <button onclick="saveTestimonial()" class="w-full py-2.5 bg-neonPurple/20 border border-neonPurple/40 text-neonPurple font-bold text-xs rounded-2xl hover:bg-neonPurple/30 transition">Simpan Testimoni</button>
             </div>
 
-            <!-- PENGATURAN PENGUMUMAN -->
-            <div class="bg-cardBg p-5 rounded-2xl border border-cyan-500/40 space-y-3">
-                <h3 class="font-bold text-sm text-neonBlue"><i class="fa-solid fa-bullhorn mr-2"></i> Pengaturan Pengumuman Web</h3>
-                <input id="inputAnnouncement" type="text" placeholder="Tulis pengumuman (Misal: QRIS normal kembali)..." class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+            <!-- PENGUMUMAN -->
+            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                <h3 class="font-bold text-xs text-neonBlue uppercase tracking-wider"><i class="fa-solid fa-bullhorn mr-1.5"></i> Banner Pengumuman Web</h3>
+                <input id="inputAnnouncement" type="text" placeholder="Tulis pengumuman gangguan atau promo..." class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
                 <div class="flex justify-between items-center pt-1">
-                    <span id="announcementStatusText" class="text-xs text-slate-300">Status: Sembunyikan</span>
+                    <span id="announcementStatusText" class="text-xs text-slate-400">Status: Sembunyikan</span>
                     <div class="space-x-2">
-                        <button onclick="saveAnnouncement(true)" class="px-3 py-1.5 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Tampilkan</button>
+                        <button onclick="saveAnnouncement(true)" class="px-3 py-1.5 bg-neonBlue/20 border border-neonBlue/40 text-neonBlue font-bold text-xs rounded-xl hover:bg-neonBlue/30 transition">Tampilkan</button>
                         <button onclick="saveAnnouncement(false)" class="px-3 py-1.5 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl hover:bg-slate-700 transition">Sembunyikan</button>
                     </div>
                 </div>
             </div>
 
-            <!-- PENGATURAN MAINTENANCE -->
-            <div class="bg-cardBg p-5 rounded-2xl border border-yellow-500/40 space-y-3">
-                <h3 class="font-bold text-sm text-yellow-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Mode Maintenance</h3>
+            <!-- MAINTENANCE -->
+            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                <h3 class="font-bold text-xs text-amber-400 uppercase tracking-wider"><i class="fa-solid fa-gears mr-1.5"></i> Mode Maintenance (Perbaikan)</h3>
                 <div class="flex justify-between items-center">
                     <span id="maintenanceStatusText" class="text-xs font-bold text-white">Status: Nonaktif</span>
-                    <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400">Aktifkan</button>
+                    <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-xl hover:bg-amber-500/30 transition">Aktifkan</button>
                 </div>
             </div>
 
-            <!-- KELOLA GAME & NOMINAL -->
+            <!-- KELOLA GAME & HARGA -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/30 space-y-3">
-                    <h3 class="font-bold text-sm text-neonBlue">Tambah Game Baru</h3>
-                    <input id="inputGameName" type="text" placeholder="Nama Game" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                    <input id="inputGameIcon" type="text" placeholder="Ikon (fa-solid fa-gamepad)" value="fa-solid fa-gamepad" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                    <button onclick="saveGame()" class="w-full py-2 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Simpan Game</button>
+                <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                    <h3 class="font-bold text-xs text-neonBlue uppercase tracking-wider">Tambah Game Baru</h3>
+                    <input id="inputGameName" type="text" placeholder="Nama Game" class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                    <input id="inputGameIcon" type="text" placeholder="Ikon (fa-solid fa-gamepad)" value="fa-solid fa-gamepad" class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                    <button onclick="saveGame()" class="w-full py-2.5 bg-neonBlue/20 border border-neonBlue/40 text-neonBlue font-bold text-xs rounded-2xl hover:bg-neonBlue/30 transition">Tambah Game</button>
                 </div>
 
-                <div class="bg-cardBg p-5 rounded-2xl border border-neonBlue/30 space-y-3">
-                    <h3 class="font-bold text-sm text-neonBlue">Tambah Nominal & Harga</h3>
-                    <select id="selectTargetGame" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white"></select>
+                <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                    <h3 class="font-bold text-xs text-neonBlue uppercase tracking-wider">Tambah Item / Nominal</h3>
+                    <select id="selectTargetGame" class="w-full neon-input rounded-2xl px-3.5 py-2 text-xs text-white"></select>
                     <div class="grid grid-cols-2 gap-2">
-                        <input id="inputItemName" type="text" placeholder="100 Diamond" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                        <input id="inputItemPrice" type="number" placeholder="15000" class="bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                        <input id="inputItemName" type="text" placeholder="100 Diamond" class="neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
+                        <input id="inputItemPrice" type="number" placeholder="15000" class="neon-input rounded-2xl px-3.5 py-2 text-xs text-white">
                     </div>
-                    <button onclick="saveNominal()" class="w-full py-2 bg-neonPurple text-white font-bold text-xs rounded-xl hover:bg-purple-600 transition">Tambah Item</button>
+                    <button onclick="saveNominal()" class="w-full py-2.5 bg-neonPurple/20 border border-neonPurple/40 text-neonPurple font-bold text-xs rounded-2xl hover:bg-neonPurple/30 transition">Tambah Item</button>
                 </div>
             </div>
 
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800">
-                <h3 class="font-bold text-sm mb-3">Daftar Game & Item Saat Ini</h3>
+            <div class="glass-card p-5 rounded-3xl border border-white/10 space-y-3">
+                <h3 class="font-bold text-xs text-slate-300 uppercase tracking-wider">Daftar Game & Item Tersimpan</h3>
                 <div id="adminGameListContainer" class="space-y-3"></div>
             </div>
         </section>
@@ -264,41 +282,40 @@
     </main>
 
     <!-- INVOICE MODAL -->
-    <div id="invoiceModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg">
+    <div id="invoiceModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="glass-card border border-neonBlue/40 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg">
             <div class="text-center space-y-1">
-                <div class="w-12 h-12 mx-auto rounded-full bg-neonBlue/20 text-neonBlue flex items-center justify-center text-xl font-bold mb-2">
+                <div class="w-12 h-12 mx-auto rounded-2xl bg-neonBlue/10 border border-neonBlue/30 text-neonBlue flex items-center justify-center text-xl shadow-neon mb-2">
                     <i class="fa-solid fa-receipt"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white">Sancheszx Store - Invoice</h3>
-                <p class="text-xs text-slate-400">Selesaikan pembayaran sesuai metode pilihan.</p>
+                <h3 class="text-base font-black text-white">Detail Invoice Pembayaran</h3>
+                <p class="text-xs text-slate-400">Selesaikan pembayaran sesuai instruksi di bawah.</p>
             </div>
 
-            <div id="paymentContentContainer" class="bg-darkBg p-3 rounded-xl text-center space-y-2 border border-slate-800">
-                <!-- QRIS Asli[span_0](start_span)[span_0](end_span) -->
-                <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS Sancheszx Store" class="w-32 h-32 mx-auto object-contain">
+            <div id="paymentContentContainer" class="bg-darkBg/90 p-3.5 rounded-2xl text-center space-y-2 border border-white/10">
+                <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS" class="w-32 h-32 mx-auto object-contain rounded-xl">
             </div>
 
-            <div class="bg-darkBg p-3 rounded-xl space-y-1.5 text-xs border border-slate-800">
+            <div class="bg-darkBg/90 p-3.5 rounded-2xl space-y-1.5 text-xs border border-white/10">
                 <div class="flex justify-between"><span class="text-slate-400">Game:</span> <span id="invGame" class="font-bold text-white"></span></div>
                 <div class="flex justify-between"><span class="text-slate-400">User ID:</span> <span id="invUser" class="font-bold text-white"></span></div>
                 <div class="flex justify-between"><span class="text-slate-400">Item:</span> <span id="invItem" class="font-bold text-neonBlue"></span></div>
                 <div class="flex justify-between"><span class="text-slate-400">Metode:</span> <span id="invPay" class="font-bold text-white"></span></div>
-                <div class="flex justify-between border-t border-slate-800 pt-2"><span class="text-slate-400">Total:</span> <span id="invPrice" class="font-extrabold text-neonBlue"></span></div>
+                <div class="flex justify-between border-t border-white/10 pt-2"><span class="text-slate-400">Total:</span> <span id="invPrice" class="font-extrabold text-neonBlue"></span></div>
             </div>
 
             <div class="space-y-2">
-                <button onclick="sendToWhatsApp()" class="w-full py-2.5 bg-green-500 hover:bg-green-600 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center justify-center">
+                <button onclick="sendToWhatsApp()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-2xl shadow-lg transition flex items-center justify-center">
                     <i class="fa-brands fa-whatsapp mr-1.5 text-base"></i> Konfirmasi ke WhatsApp Admin
                 </button>
-                <button onclick="closeInvoice()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-xl transition">
+                <button onclick="closeInvoice()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-2xl transition">
                     Tutup
                 </button>
             </div>
         </div>
     </div>
 
-    <footer class="bg-cardBg border-t border-neonBlue/20 text-center py-4 mt-8 text-xs text-slate-400">
+    <footer class="glass-card border-t border-white/10 text-center py-4 mt-12 text-xs text-slate-400">
         <p>&copy; 2026 Sancheszx Store. All rights reserved.</p>
     </footer>
     <script>
@@ -312,18 +329,18 @@
         ];
 
         const defaultTestimonials = [
-            { name: "Rizky Gamer", text: "Mantap banget, top up ML cuma 1 detik langsung masuk!" },
-            { name: "Siti Nurhaliza", text: "Adminnya ramah banget, pakai DANA lancar jaya." }
+            { name: "Rizky Gaming", text: "Mantap banget, top up ML cuma 1 detik langsung masuk!" },
+            { name: "Siti Rahma", text: "Admin ramah, pakai DANA aman dan terpercaya." }
         ];
 
-        let gamesData = JSON.parse(localStorage.getItem('gojoStoreData')) || defaultData;
+        let gamesData = JSON.parse(localStorage.getItem('sancheszxGames')) || defaultData;
         let testimonialsData = JSON.parse(localStorage.getItem('sancheszxTestimonials')) || defaultTestimonials;
         let orderHistory = JSON.parse(localStorage.getItem('sancheszxHistory')) || [];
         let isMaintenance = JSON.parse(localStorage.getItem('sancheszxMaintenance')) || false;
         let storeAnnouncement = JSON.parse(localStorage.getItem('sancheszxAnnouncement')) || { active: false, text: '' };
 
         function saveData() {
-            localStorage.setItem('gojoStoreData', JSON.stringify(gamesData));
+            localStorage.setItem('sancheszxGames', JSON.stringify(gamesData));
             renderShop();
             renderAdmin();
         }
@@ -332,7 +349,7 @@
             if(confirm('Reset semua data ke pengaturan awal?')) {
                 gamesData = JSON.parse(JSON.stringify(defaultData));
                 testimonialsData = JSON.parse(JSON.stringify(defaultTestimonials));
-                localStorage.removeItem('gojoStoreData');
+                localStorage.removeItem('sancheszxGames');
                 localStorage.removeItem('sancheszxTestimonials');
                 saveData();
                 renderTestimonials();
@@ -372,9 +389,9 @@
             const requiredWins = Math.ceil((target * total - 100 * currentWins) / (100 - target));
 
             if (requiredWins <= 0) {
-                resultBox.innerHTML = "<span class='text-emerald-400'>🎉 Kamu sudah mencapai atau melewati target Win Rate!</span>";
+                resultBox.innerHTML = "<span class='text-emerald-400'>🎉 Target Win Rate sudah tercapai!</span>";
             } else {
-                resultBox.innerHTML = `Kamu membutuhkan sekitar <strong class='text-neonBlue text-sm'>${requiredWins} kemenangan beruntun</strong> tanpa kekalahan untuk mencapai target ${target}%.`;
+                resultBox.innerHTML = `Butuh sekitar <strong class='text-neonBlue text-sm'>${requiredWins} kemenangan beruntun</strong> untuk mencapai target ${target}%.`;
             }
         }
 
@@ -384,10 +401,10 @@
             container.innerHTML = '';
             testimonialsData.forEach((t, idx) => {
                 container.innerHTML += `
-                    <div class="bg-darkBg/60 p-3 rounded-xl border border-slate-800 space-y-1 relative">
+                    <div class="bg-darkBg/80 p-3 rounded-2xl border border-white/10 space-y-1 relative">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-xs text-neonBlue">${t.name}</span>
-                            <div class="text-yellow-400 text-[10px]"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <div class="text-amber-400 text-[10px]"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <p class="text-[11px] text-slate-300">"${t.text}"</p>
                         ${isAdminLoggedIn ? `<button onclick="deleteTestimonial(${idx})" class="absolute top-2 right-2 text-red-400 text-[10px] hover:text-red-300"><i class="fa-solid fa-trash"></i></button>` : ''}
@@ -395,7 +412,8 @@
                 `;
             });
         }
-
+    </script>
+    <script>
         function saveTestimonial() {
             const name = document.getElementById('inputTestiName').value.trim();
             const text = document.getElementById('inputTestiText').value.trim();
@@ -405,7 +423,7 @@
             document.getElementById('inputTestiName').value = '';
             document.getElementById('inputTestiText').value = '';
             renderTestimonials();
-            alert('Testimoni berhasil ditambahkan!');
+            alert('Testimoni ditambahkan!');
         }
 
         function deleteTestimonial(idx) {
@@ -418,19 +436,19 @@
             const container = document.getElementById('historyListContainer');
             if (!container) return;
             if (orderHistory.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">Belum ada riwayat transaksi tersimpan.</p>`;
+                container.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">Belum ada riwayat transaksi.</p>`;
                 return;
             }
             container.innerHTML = '';
-            orderHistory.forEach((h, idx) => {
+            orderHistory.forEach((h) => {
                 container.innerHTML += `
-                    <div class="bg-darkBg p-3 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
+                    <div class="bg-darkBg/90 p-3.5 rounded-2xl border border-white/10 flex justify-between items-center text-xs">
                         <div class="space-y-0.5">
                             <div class="font-bold text-white">${h.game} - <span class="text-neonBlue">${h.item}</span></div>
                             <div class="text-[10px] text-slate-400">ID: ${h.userId} | ${h.payment} (${h.price})</div>
                             <div class="text-[9px] text-slate-500">${h.date}</div>
                         </div>
-                        <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] rounded-lg font-semibold">Berhasil</span>
+                        <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] rounded-xl font-semibold">Sukses</span>
                     </div>
                 `;
             });
@@ -462,7 +480,7 @@
             if (inputField) inputField.value = storeAnnouncement.text;
             if (statusText) {
                 statusText.innerText = storeAnnouncement.active ? "Status: Ditampilkan" : "Status: Sembunyikan";
-                statusText.className = storeAnnouncement.active ? "text-xs font-bold text-green-400" : "text-xs text-slate-400";
+                statusText.className = storeAnnouncement.active ? "text-xs font-bold text-emerald-400" : "text-xs text-slate-400";
             }
             if (banner && textDisplay) {
                 if (storeAnnouncement.active && storeAnnouncement.text) {
@@ -490,12 +508,12 @@
                     statusText.innerText = "Status: AKTIF (Web Ditutup)";
                     statusText.className = "text-xs font-bold text-red-400";
                     btn.innerText = "Matikan";
-                    btn.className = "px-4 py-2 bg-red-500 text-white font-bold text-xs rounded-xl shadow-lg transition hover:bg-red-400";
+                    btn.className = "px-4 py-2 bg-red-500/20 border border-red-500/40 text-red-400 font-bold text-xs rounded-xl hover:bg-red-500/30 transition";
                 } else {
                     statusText.innerText = "Status: Nonaktif (Normal)";
-                    statusText.className = "text-xs font-bold text-green-400";
+                    statusText.className = "text-xs font-bold text-emerald-400";
                     btn.innerText = "Aktifkan";
-                    btn.className = "px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400";
+                    btn.className = "px-4 py-2 bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-xl hover:bg-amber-500/30 transition";
                 }
             }
         }
@@ -516,7 +534,7 @@
                 switchTab('admin');
                 return;
             }
-            let pass = prompt("Masukkan Password Developer/Admin:");
+            let pass = prompt("Masukkan Password Admin (1234):");
             if (pass === "sancheszx357") {
                 isAdminLoggedIn = true;
                 checkMaintenanceMode();
@@ -541,21 +559,21 @@
             toolsSec.classList.add('hidden');
             historySec.classList.add('hidden');
             adminSec.classList.add('hidden');
-            navShop.className = navTools.className = navHistory.className = navAdmin.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+            navShop.className = navTools.className = navHistory.className = navAdmin.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition";
 
             if(tab === 'shop') {
                 shopSec.classList.remove('hidden');
-                navShop.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition";
+                navShop.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/30 transition shadow-neon";
             } else if(tab === 'tools') {
                 toolsSec.classList.remove('hidden');
-                navTools.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition";
+                navTools.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/30 transition shadow-neon";
             } else if(tab === 'history') {
                 historySec.classList.remove('hidden');
-                navHistory.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/40 transition";
+                navHistory.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-neonBlue bg-neonBlue/10 border border-neonBlue/30 transition shadow-neon";
                 renderHistory();
             } else if(tab === 'admin') {
                 adminSec.classList.remove('hidden');
-                navAdmin.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonPurple bg-neonPurple/10 border border-neonPurple/40 transition";
+                navAdmin.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-neonPurple bg-neonPurple/10 border border-neonPurple/30 transition shadow-glass";
                 renderAdmin();
                 updateMaintenanceUI();
                 updateAnnouncementUI();
@@ -569,11 +587,11 @@
             grid.innerHTML = '';
             gamesData.forEach(game => {
                 grid.innerHTML += `
-                    <div onclick="selectGame('${game.id}')" class="bg-cardBg p-3 rounded-xl border border-slate-800 hover:border-neonBlue cursor-pointer transition transform hover:-translate-y-1 text-center space-y-2 group shadow-lg">
-                        <div class="w-10 h-10 mx-auto rounded-lg bg-darkBg flex items-center justify-center text-neonBlue text-lg group-hover:shadow-neon transition">
+                    <div onclick="selectGame('${game.id}')" class="glass-card p-3.5 rounded-2xl cursor-pointer transition transform hover:-translate-y-1 text-center space-y-2 group">
+                        <div class="w-11 h-11 mx-auto rounded-xl bg-darkBg border border-white/10 flex items-center justify-center text-neonBlue text-lg group-hover:shadow-neon transition">
                             <i class="${game.icon}"></i>
                         </div>
-                        <h4 class="font-bold text-xs truncate">${game.name}</h4>
+                        <h4 class="font-bold text-xs truncate text-slate-200 group-hover:text-neonBlue transition">${game.name}</h4>
                     </div>
                 `;
             });
@@ -595,7 +613,7 @@
             nominalList.innerHTML = '';
             currentGame.items.forEach((item, idx) => {
                 nominalList.innerHTML += `
-                    <label class="border border-slate-800 bg-darkBg p-2.5 rounded-xl cursor-pointer hover:border-neonBlue transition flex flex-col justify-between">
+                    <label class="border border-white/10 bg-darkBg/80 p-2.5 rounded-2xl cursor-pointer hover:border-neonBlue transition flex flex-col justify-between">
                         <div class="flex items-center justify-between mb-1">
                             <span class="text-[11px] font-semibold text-slate-300">${item.name}</span>
                             <input type="radio" name="nominal" value="${idx}" class="accent-cyan-400" ${idx === 0 ? 'checked' : ''}>
@@ -610,14 +628,14 @@
         function processCheckout() {
             const userId = document.getElementById('inputUserId').value.trim();
             if(!userId) {
-                alert('Silakan masukkan User ID terlebih dahulu!');
+                alert('Masukkan User ID terlebih dahulu!');
                 document.getElementById('inputUserId').focus();
                 return;
             }
 
             const selectedRadio = document.querySelector('input[name="nominal"]:checked');
             if(!selectedRadio) {
-                alert('Silakan pilih nominal top-up!');
+                alert('Pilih nominal top-up!');
                 return;
             }
 
@@ -647,16 +665,16 @@
             const paymentContainer = document.getElementById('paymentContentContainer');
             if (paymentMethod === 'QRIS') {
                 paymentContainer.innerHTML = `
-                    <div class="bg-white p-2 rounded-lg inline-block">
-                        <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS Sancheszx Store" class="w-32 h-32 mx-auto object-contain">
+                    <div class="bg-white p-2 rounded-xl inline-block shadow-lg">
+                        <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS" class="w-32 h-32 mx-auto object-contain">
                     </div>
-                    <p class="text-[10px] text-slate-400">Scan QRIS pakai semua m-Banking / E-Wallet</p>
+                    <p class="text-[10px] text-slate-400">Scan QRIS menggunakan semua m-Banking / E-Wallet</p>
                 `;
             } else if (paymentMethod === 'GoPay') {
                 paymentContainer.innerHTML = `
                     <div class="py-3 space-y-1">
                         <span class="text-[10px] text-slate-400 uppercase tracking-widest">Nomor Tujuan GoPay</span>
-                        <div class="text-lg font-extrabold text-neonBlue">6285603088228</div>
+                        <div class="text-base font-black text-neonBlue">6285603088228</div>
                         <p class="text-[10px] text-slate-400">Atas Nama: Sancheszx Store</p>
                     </div>
                 `;
@@ -664,7 +682,7 @@
                 paymentContainer.innerHTML = `
                     <div class="py-3 space-y-1">
                         <span class="text-[10px] text-slate-400 uppercase tracking-widest">Nomor Tujuan DANA</span>
-                        <div class="text-lg font-extrabold text-neonBlue">6283878003915</div>
+                        <div class="text-base font-black text-neonBlue">6283878003915</div>
                         <p class="text-[10px] text-slate-400">Atas Nama: Sancheszx Store</p>
                     </div>
                 `;
@@ -687,8 +705,7 @@
                             `💰 Total: ${currentOrderData.price}\n\n` +
                             `Berikut bukti transfernya. Mohon diproses ya!`;
 
-            const whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         function closeInvoice() {
@@ -710,14 +727,14 @@
             container.innerHTML = '';
             gamesData.forEach(g => {
                 let itemsHtml = g.items.map((it, idx) => `
-                    <div class="flex justify-between items-center bg-darkBg px-3 py-1.5 rounded-lg text-xs mb-1">
+                    <div class="flex justify-between items-center bg-darkBg px-3 py-1.5 rounded-xl text-xs mb-1 border border-white/5">
                         <span>${it.name} - <strong class="text-neonBlue">Rp ${it.price.toLocaleString('id-ID')}</strong></span>
                         <button onclick="deleteItem('${g.id}', ${idx})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 `).join('');
 
                 container.innerHTML += `
-                    <div class="bg-darkBg/50 p-3 rounded-xl border border-slate-800 space-y-2">
+                    <div class="bg-darkBg/60 p-3.5 rounded-2xl border border-white/10 space-y-2">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-xs text-neonBlue"><i class="${g.icon} mr-1"></i> ${g.name}</span>
                             <button onclick="deleteGame('${g.id}')" class="text-red-400 hover:text-red-300 text-[10px]"><i class="fa-solid fa-trash mr-1"></i> Hapus</button>
