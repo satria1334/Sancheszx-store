@@ -20,7 +20,21 @@
                     },
                     boxShadow: {
                         'neon': '0 0 15px rgba(0, 240, 255, 0.5)',
-                        'neon-lg': '0 0 25px rgba(0, 240, 255, 0.8)',
+                        'neon-lg': '0 0 30px rgba(0, 240, 255, 0.8)',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(0, 240, 255, 0.5)' },
+                            '50%': { boxShadow: '0 0 35px rgba(0, 240, 255, 0.9)' },
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'pulseGlow 2.5s ease-in-out infinite',
                     }
                 }
             }
@@ -40,7 +54,7 @@
     <!-- NAVBAR -->
     <nav class="bg-cardBg/90 backdrop-blur-md border-b border-neonBlue/30 sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon animate-pulse">
                 <i class="fa-solid fa-bolt text-darkBg font-bold text-sm"></i>
             </div>
             <span class="text-base font-extrabold tracking-wider bg-gradient-to-r from-neonBlue to-white bg-clip-text text-transparent">GOJO<span class="text-neonBlue">STORE</span></span>
@@ -56,16 +70,20 @@
 
         <!-- SHOP SECTION -->
         <section id="shopSection" class="space-y-6">
-            <!-- Hero Banner Gojo Style -->
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/40 via-cardBg to-purple-900/40 p-6 border border-neonBlue/30 shadow-neon flex flex-col md:flex-row items-center justify-between">
+            <!-- Hero Banner Gojo Style with Floating & Alive Animation -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/60 via-cardBg to-purple-900/60 p-6 border border-neonBlue/40 shadow-neon flex flex-col md:flex-row items-center justify-between">
                 <div class="space-y-3 max-w-md z-10 text-center md:text-left">
                     <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40">Infinite Void Top Up</span>
                     <h1 class="text-2xl md:text-4xl font-extrabold leading-tight">Top Up Game Cepat, Aman & <span class="text-neonBlue drop-shadow-[0_0_10px_rgba(0,240,255,0.7)]">Tanpa Batas</span></h1>
-                    <p class="text-slate-300 text-xs md:text-sm">Proses instan 24 jam dengan nuansa energi Cursed Technique Reversal Blue!</p>
+                    <p class="text-slate-300 text-xs md:text-sm">Proses instan 24 jam dengan kekuatan penuh Gojo Satoru!</p>
                 </div>
                 <div class="mt-4 md:mt-0 relative">
-                    <div class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-tr from-neonBlue/20 to-neonPurple/20 flex items-center justify-center shadow-neon-lg border border-neonBlue/55 animate-pulse">
-                        <i class="fa-solid fa-user-ninja text-5xl text-neonBlue drop-shadow-[0_0_15px_#00f0ff]"></i>
+                    <!-- Gojo Image with Floating & Glow Animation (Hidup/Gerak-Gerik Halus) -->
+                    <div class="w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden border-2 border-neonBlue shadow-neon-lg relative group animate-float animate-glow">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop&q=80" alt="Gojo Satoru Anime" class="w-full h-full object-cover filter brightness-110 group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-transparent to-transparent flex items-end p-2 justify-center">
+                            <span class="text-[10px] font-extrabold text-neonBlue tracking-widest drop-shadow-[0_0_8px_#00f0ff]">INFINITY VOID</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,15 +111,15 @@
                     <div class="space-y-3">
                         <div>
                             <label class="block text-xs font-medium mb-1 text-slate-300">User ID / Server ID</label>
-                            <input type="text" placeholder="Contoh: 12345678 (1234)" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                            <input id="inputUserId" type="text" placeholder="Contoh: 12345678 (1234)" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1 text-slate-300">Metode Pembayaran</label>
-                            <select class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                                <option>QRIS (Instant)</option>
-                                <option>DANA</option>
-                                <option>GoPay</option>
-                                <option>Transfer Bank BCA</option>
+                            <select id="selectPayment" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
+                                <option value="QRIS">QRIS (Instant - Bebas Biaya)</option>
+                                <option value="DANA">DANA</option>
+                                <option value="GoPay">GoPay</option>
+                                <option value="BCA">Transfer Bank BCA</option>
                             </select>
                         </div>
                     </div>
@@ -115,7 +133,7 @@
                     </div>
                 </div>
 
-                <button onclick="checkout()" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonBlue to-blue-600 text-darkBg font-extrabold text-sm shadow-neon hover:opacity-90 transition">
+                <button onclick="processCheckout()" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonBlue to-blue-600 text-darkBg font-extrabold text-sm shadow-neon hover:opacity-90 transition">
                     BAYAR SEKARANG
                 </button>
             </div>
@@ -180,9 +198,30 @@
 
     </main>
 
+    <!-- INVOICE / SUCCESS MODAL -->
+    <div id="invoiceModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg animate-pulse">
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 mx-auto rounded-full bg-neonBlue/20 text-neonBlue flex items-center justify-center text-xl font-bold mb-2">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Transaksi Berhasil!</h3>
+                <p class="text-xs text-slate-400">Pesanan Anda sedang diproses secara instan.</p>
+            </div>
+            <div class="bg-darkBg p-3 rounded-xl space-y-2 text-xs border border-slate-800">
+                <div class="flex justify-between"><span class="text-slate-400">Game:</span> <span id="invGame" class="font-bold text-white"></span></div>
+                <div class="flex justify-between"><span class="text-slate-400">User ID:</span> <span id="invUser" class="font-bold text-white"></span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Item:</span> <span id="invItem" class="font-bold text-neonBlue"></span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Pembayaran:</span> <span id="invPay" class="font-bold text-white"></span></div>
+                <div class="flex justify-between border-t border-slate-800 pt-2"><span class="text-slate-400">Total Harga:</span> <span id="invPrice" class="font-extrabold text-neonBlue"></span></div>
+            </div>
+            <button onclick="closeInvoice()" class="w-full py-2.5 bg-neonBlue text-darkBg font-bold text-xs rounded-xl hover:bg-cyan-400 transition">Tutup & Selesai</button>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="bg-cardBg border-t border-neonBlue/20 text-center py-4 mt-8 text-xs text-slate-400">
-        <p>&copy; 2026 GojoStore. All rights reserved.</p>
+        <p>&copy; 2026 GojoStore. All rights reserved. Domain Infinity Void.</p>
     </footer>
 
     <!-- JAVASCRIPT LOGIC -->
@@ -190,7 +229,7 @@
         const defaultData = [
             { id: 'ff', name: 'Free Fire', icon: 'fa-solid fa-fire', items: [{name: '70 Diamonds', price: 10000}, {name: '140 Diamonds', price: 20000}, {name: '355 Diamonds', price: 50000}] },
             { id: 'ml', name: 'Mobile Legends', icon: 'fa-solid fa-shield-halved', items: [{name: '85 Diamonds', price: 20000}, {name: '170 Diamonds', price: 40000}, {name: '284 Diamonds', price: 75000}] },
-            { id: 'pubg', name: 'PUBG Mobile', icon: 'fa-solid fa-plane', items: [{name: '60 UC', price: 15000}, {name: '325 UC', price: 75000}] },
+            { id: 'pubg', name: 'PUBG Mobile', icon: 'fa-solid fa-plane-up', items: [{name: '60 UC', price: 15000}, {name: '325 UC', price: 75000}] },
             { id: 'coc', name: 'Clash of Clans', icon: 'fa-solid fa-chess-rook', items: [{name: '500 Gems', price: 45000}, {name: '1200 Gems', price: 100000}] },
             { id: 'hok', name: 'Honor of Kings', icon: 'fa-solid fa-crown', items: [{name: '80 Tokens', price: 15000}, {name: '400 Tokens', price: 70000}] },
             { id: 'roblox', name: 'Roblox', icon: 'fa-solid fa-cube', items: [{name: '400 Robux', price: 65000}, {name: '800 Robux', price: 130000}] }
@@ -241,122 +280,4 @@
                         <div class="w-10 h-10 mx-auto rounded-lg bg-darkBg flex items-center justify-center text-neonBlue text-lg group-hover:shadow-neon transition">
                             <i class="${game.icon}"></i>
                         </div>
-                        <h4 class="font-bold text-xs truncate">${game.name}</h4>
-                    </div>
-                `;
-            });
-        }
-
-        let currentGame = null;
-        function selectGame(gameId) {
-            currentGame = gamesData.find(g => g.id === gameId);
-            if(!currentGame) return;
-
-            document.getElementById('transactionCard').classList.remove('hidden');
-            document.getElementById('selectedGameTitleinnerText = currentGame.name');
-            document.getElementById('selectedGameTitle').innerText = currentGame.name;
-            document.getElementById('selectedGameIcon').innerHTML = `<i class="${currentGame.icon}"></i>`;
-
-            const nominalList = document.getElementById('nominalList');
-            nominalList.innerHTML = '';
-            currentGame.items.forEach((item, idx) => {
-                nominalList.innerHTML += `
-                    <label class="border border-slate-800 bg-darkBg p-2.5 rounded-xl cursor-pointer hover:border-neonBlue transition flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-[11px] font-semibold text-slate-300">${item.name}</span>
-                            <input type="radio" name="nominal" class="accent-cyan-400" ${idx === 0 ? 'checked' : ''}>
-                        </div>
-                        <span class="text-xs font-bold text-neonBlue">Rp ${item.price.toLocaleString('id-ID')}</span>
-                    </label>
-                `;
-            });
-            window.scrollTo({top: document.getElementById('transactionCard').offsetTop - 60, behavior: 'smooth'});
-        }
-
-        function checkout() {
-            alert('Pesanan berhasil diproses! Silakan selesaikan pembayaran.');
-        }
-
-        function renderAdmin() {
-            const selectTarget = document.getElementById('selectTargetGame');
-            if(!selectTarget) return;
-            selectTarget.innerHTML = '';
-            gamesData.forEach(g => {
-                selectTarget.innerHTML += `<option value="${g.id}">${g.name}</option>`;
-            });
-
-            const container = document.getElementById('adminGameListContainer');
-            container.innerHTML = '';
-            gamesData.forEach(g => {
-                let itemsHtml = g.items.map((it, idx) => `
-                    <div class="flex justify-between items-center bg-darkBg px-3 py-1.5 rounded-lg text-xs mb-1">
-                        <span>${it.name} - <strong class="text-neonBlue">Rp ${it.price.toLocaleString('id-ID')}</strong></span>
-                        <button onclick="deleteItem('${g.id}', ${idx})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `).join('');
-
-                container.innerHTML += `
-                    <div class="bg-darkBg/50 p-3 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-xs text-neonBlue"><i class="${g.icon} mr-1"></i> ${g.name}</span>
-                            <button onclick="deleteGame('${g.id}')" class="text-red-400 hover:text-red-300 text-[10px]"><i class="fa-solid fa-trash mr-1"></i> Hapus</button>
-                        </div>
-                        <div class="pl-3 border-l-2 border-neonBlue/30 space-y-1">
-                            ${itemsHtml || '<span class="text-[10px] text-slate-500">Belum ada item.</span>'}
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function saveGame() {
-            const name = document.getElementById('inputGameName').value.trim();
-            const icon = document.getElementById('inputGameIcon').value.trim();
-            if(!name) return alert('Nama game wajib diisi!');
-
-            const id = name.toLowerCase().replace(/\s+/g, '');
-            gamesData.push({ id, name, icon: icon || 'fa-solid fa-gamepad', items: [] });
-            document.getElementById('inputGameName').value = '';
-            saveData();
-            alert('Game berhasil ditambahkan!');
-        }
-
-        function saveNominal() {
-            const targetId = document.getElementById('selectTargetGame').value;
-            const itemName = document.getElementById('inputItemName').value.trim();
-            const itemPrice = parseInt(document.getElementById('inputItemPrice').value);
-
-            if(!itemName || isNaN(itemPrice)) return alert('Nama item dan harga harus diisi dengan benar!');
-
-            const game = gamesData.find(g => g.id === targetId);
-            if(game) {
-                game.items.push({ name: itemName, price: itemPrice });
-                document.getElementById('inputItemName').value = '';
-                document.getElementById('inputItemPrice').value = '';
-                saveData();
-                alert('Nominal berhasil ditambahkan!');
-            }
-        }
-
-        function deleteGame(gameId) {
-            if(confirm('Hapus game ini?')) {
-                gamesData = gamesData.filter(g => g.id !== gameId);
-                saveData();
-            }
-        }
-
-        function deleteItem(gameId, itemIdx) {
-            const game = gamesData.find(g => g.id === gameId);
-            if(game) {
-                game.items.splice(itemIdx, 1);
-                saveData();
-            }
-        }
-
-        // Jalankan render saat halaman siap
-        window.onload = function() {
-            renderShop();
-        };
-    </script>
-</body>
-</html>
+                        <h4 class
