@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GojoStore - Top Up Games & Admin Panel</title>
+    <title>GojoStore - Top Up Games Infinity</title>
     <!-- Google Fonts & Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,7 +30,6 @@
         body { font-family: 'Poppins', sans-serif; background-color: #090d16; color: #f8fafc; }
         .neon-border { border: 1px solid rgba(0, 240, 255, 0.4); }
         .neon-border:focus, .neon-border:hover { border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
-        /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #090d16; }
         ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
@@ -60,12 +59,11 @@
             <!-- Hero Banner Gojo Style -->
             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/40 via-cardBg to-purple-900/40 p-8 border border-neonBlue/30 shadow-neon flex flex-col md:flex-row items-center justify-between">
                 <div class="space-y-4 max-w-lg z-10">
-                    <span class="px-3 py-1 text-xs font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40">Infinite Top Up</span>
+                    <span class="px-3 py-1 text-xs font-bold uppercase tracking-widest bg-neonBlue/20 text-neonBlue rounded-full border border-neonBlue/40">Infinite Void Top Up</span>
                     <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Top Up Game Cepat, Aman & <span class="text-neonBlue drop-shadow-[0_0_10px_rgba(0,240,255,0.7)]">Tanpa Batas</span></h1>
-                    <p class="text-slate-300 text-sm md:text-base">Proses instan 24 jam dengan harga termurah se-antero semesta jujutsu!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Proses instan 24 jam dengan nuansa energi Cursed Technique Reversal Blue!</p>
                 </div>
                 <div class="mt-6 md:mt-0 relative">
-                    <!-- Ilustrasi Gojo / Neon Aura Effect -->
                     <div class="w-48 h-48 md:w-60 md:h-60 rounded-full bg-gradient-to-tr from-neonBlue/20 to-neonPurple/20 flex items-center justify-center shadow-neon-lg border border-neonBlue/55 animate-pulse">
                         <i class="fa-solid fa-user-ninja text-7xl text-neonBlue drop-shadow-[0_0_15px_#00f0ff]"></i>
                     </div>
@@ -130,19 +128,19 @@
                     <h2 class="text-xl font-bold text-neonPurple"><i class="fa-solid fa-code mr-2"></i> Developer Control Panel</h2>
                     <button onclick="resetData()" class="px-3 py-1.5 text-xs bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Reset Default</button>
                 </div>
-                <p class="text-sm text-slate-400">Di sini Anda dapat menambah, mengubah, atau menghapus game beserta nominal harga top-up secara real-time.</p>
+                <p class="text-sm text-slate-400">Edit daftar game, tambah nominal, atau ubah harga langsung dari panel ini.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Form Tambah/Edit Game -->
                 <div class="bg-cardBg p-6 rounded-2xl border border-neonBlue/30 space-y-4">
-                    <h3 class="font-bold text-lg text-neonBlue">Tambah / Edit Game</h3>
+                    <h3 class="font-bold text-lg text-neonBlue">Tambah Game Baru</h3>
                     <div>
                         <label class="block text-sm text-slate-300 mb-1">Nama Game</label>
                         <input id="inputGameName" type="text" placeholder="Misal: Valorant" class="w-full bg-darkBg border neon-border rounded-xl px-4 py-2.5 outline-none text-white">
                     </div>
                     <div>
-                        <label class="block text-sm text-slate-300 mb-1">Kode Ikon / Inisial (FontAwesome)</label>
+                        <label class="block text-sm text-slate-300 mb-1">Kode Ikon (FontAwesome)</label>
                         <input id="inputGameIcon" type="text" placeholder="fa-solid fa-shield" value="fa-solid fa-gamepad" class="w-full bg-darkBg border neon-border rounded-xl px-4 py-2.5 outline-none text-white">
                     </div>
                     <button onclick="saveGame()" class="w-full py-3 bg-neonBlue text-darkBg font-bold rounded-xl shadow-neon hover:bg-cyan-400 transition">Simpan Game</button>
@@ -189,7 +187,6 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Data Default Game & Nominal
         const defaultData = [
             { id: 'ff', name: 'Free Fire', icon: 'fa-solid fa-fire', items: [{name: '70 Diamonds', price: 10000}, {name: '140 Diamonds', price: 20000}, {name: '355 Diamonds', price: 50000}] },
             { id: 'ml', name: 'Mobile Legends', icon: 'fa-solid fa-shield-halved', items: [{name: '85 Diamonds', price: 20000}, {name: '170 Diamonds', price: 40000}, {name: '284 Diamonds', price: 75000}] },
@@ -199,7 +196,6 @@
             { id: 'roblox', name: 'Roblox', icon: 'fa-solid fa-cube', items: [{name: '400 Robux', price: 65000}, {name: '800 Robux', price: 130000}] }
         ];
 
-        // Load data from localStorage or fallback to default
         let gamesData = JSON.parse(localStorage.getItem('gojoStoreData')) || defaultData;
 
         function saveData() {
@@ -215,7 +211,6 @@
             }
         }
 
-        // Tab Navigation Switcher
         function switchTab(tab) {
             const shopSec = document.getElementById('shopSection');
             const adminSec = document.getElementById('adminSection');
@@ -236,7 +231,6 @@
             }
         }
 
-        // Render Shop View
         function renderShop() {
             const grid = document.getElementById('gameGrid');
             grid.innerHTML = '';
@@ -265,100 +259,4 @@
             nominalList.innerHTML = '';
             currentGame.items.forEach((item, idx) => {
                 nominalList.innerHTML += `
-                    <label class="border border-slate-800 bg-darkBg p-3 rounded-xl cursor-pointer hover:border-neonBlue transition flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-xs font-semibold text-slate-300">${item.name}</span>
-                            <input type="radio" name="nominal" class="accent-cyan-400" ${idx === 0 ? 'checked' : ''}>
-                        </div>
-                        <span class="text-sm font-bold text-neonBlue">Rp ${item.price.toLocaleString('id-ID')}</span>
-                    </label>
-                `;
-            });
-            window.scrollTo({top: document.getElementById('transactionCard').offsetTop - 80, behavior: 'smooth'});
-        }
-
-        function checkout() {
-            alert('Pesanan berhasil diproses! Silakan selesaikan pembayaran.');
-        }
-
-        // Render Admin View
-        function renderAdmin() {
-            const selectTarget = document.getElementById('selectTargetGame');
-            selectTarget.innerHTML = '';
-            gamesData.forEach(g => {
-                selectTarget.innerHTML += `<option value="${g.id}">${g.name}</option>`;
-            });
-
-            const container = document.getElementById('adminGameListContainer');
-            container.innerHTML = '';
-            gamesData.forEach(g => {
-                let itemsHtml = g.items.map((it, idx) => `
-                    <div class="flex justify-between items-center bg-darkBg px-3 py-2 rounded-lg text-xs mb-1">
-                        <span>${it.name} - <strong class="text-neonBlue">Rp ${it.price.toLocaleString('id-ID')}</strong></span>
-                        <button onclick="deleteItem('${g.id}', ${idx})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `).join('');
-
-                container.innerHTML += `
-                    <div class="bg-darkBg/50 p-4 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-neonBlue"><i class="${g.icon} mr-2"></i> ${g.name}</span>
-                            <button onclick="deleteGame('${g.id}')" class="text-red-400 hover:text-red-300 text-xs"><i class="fa-solid fa-trash mr-1"></i> Hapus Game</button>
-                        </div>
-                        <div class="pl-4 border-l-2 border-neonBlue/30 space-y-1">
-                            ${itemsHtml || '<span class="text-xs text-slate-500">Belum ada item.</span>'}
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function saveGame() {
-            const name = document.getElementById('inputGameName').value.trim();
-            const icon = document.getElementById('inputGameIcon').value.trim();
-            if(!name) return alert('Nama game wajib diisi!');
-
-            const id = name.toLowerCase().replace(/\s+/g, '');
-            gamesData.push({ id, name, icon: icon || 'fa-solid fa-gamepad', items: [] });
-            document.getElementById('inputGameName').value = '';
-            saveData();
-            alert('Game berhasil ditambahkan!');
-        }
-
-        function saveNominal() {
-            const targetId = document.getElementById('selectTargetGame').value;
-            const itemName = document.getElementById('inputItemName').value.trim();
-            const itemPrice = parseInt(document.getElementById('inputItemPrice').value);
-
-            if(!itemName || isNaN(itemPrice)) return alert('Nama item dan harga harus diisi dengan benar!');
-
-            const game = gamesData.find(g => g.id === targetId);
-            if(game) {
-                game.items.push({ name: itemName, price: itemPrice });
-                document.getElementById('inputItemName').value = '';
-                document.getElementById('inputItemPrice').value = '';
-                saveData();
-                alert('Nominal berhasil ditambahkan!');
-            }
-        }
-
-        function deleteGame(gameId) {
-            if(confirm('Hapus game ini?')) {
-                gamesData = gamesData.filter(g => g.id !== gameId);
-                saveData();
-            }
-        }
-
-        function deleteItem(gameId, itemIdx) {
-            const game = gamesData.find(g => g.id === gameId);
-            if(game) {
-                game.items.splice(itemIdx, 1);
-                saveData();
-            }
-        }
-
-        // Initial load
-        renderShop();
-    </script>
-</body>
-</html>
+                    <label class="border border-slate-800 bg-darkBg p-3 rounded-xl cursor-pointer hover:border-neonBlue transition
