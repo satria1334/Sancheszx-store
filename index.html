@@ -53,6 +53,19 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
+    <!-- LAYAR PEMBERITAHUAN MAINTENANCE (MUNCUL OTOMATIS JIKA AKTIF) -->
+    <div id="maintenanceOverlay" class="hidden fixed inset-0 bg-darkBg/95 z-[100] flex flex-col items-center justify-center p-6 text-center space-y-4 backdrop-blur-md">
+        <div class="w-16 h-16 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-bounce">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-white">WEB SEDANG MAINTENANCE</h1>
+        <p class="text-xs md:text-sm text-slate-400 max-w-md">Sancheszx Store sedang dalam perbaikan dan peningkatan sistem. Mohon bersabar ya, kami akan segera kembali!</p>
+        <button onclick="tryOpenAdmin()" class="px-5 py-2.5 bg-cardBg border border-yellow-500/50 text-yellow-400 rounded-xl text-xs font-bold hover:bg-yellow-500/10 transition shadow-lg">
+            <i class="fa-solid fa-lock mr-1"></i> Login Admin untuk Buka Web
+        </button>
+    </div>
+
+    <!-- NAVBAR -->
     <nav class="bg-cardBg/90 backdrop-blur-md border-b border-neonBlue/30 sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-2">
             <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-neonBlue to-neonPurple flex items-center justify-center shadow-neon">
@@ -67,6 +80,7 @@
     </nav>
     <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl space-y-6">
 
+        <!-- SHOP SECTION -->
         <section id="shopSection" class="space-y-6">
             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/60 via-cardBg to-purple-900/60 p-6 border border-neonBlue/40 shadow-neon flex flex-col md:flex-row items-center justify-between">
                 <div class="space-y-3 max-w-md z-10 text-center md:text-left">
@@ -107,10 +121,9 @@
                         <div>
                             <label class="block text-xs font-medium mb-1 text-slate-300">Metode Pembayaran</label>
                             <select id="selectPayment" class="w-full bg-darkBg border neon-border rounded-xl px-3 py-2 text-sm outline-none text-white">
-                                <option value="QRIS">QRIS (Satu Untuk Semua)</option>
-                                <option value="DANA">DANA</option>
-                                <option value="GoPay">GoPay</option>
-                                <option value="BCA">Transfer Bank BCA</option>
+                                <option value="QRIS">1. QRIS (Satu Untuk Semua)</option>
+                                <option value="GoPay">2. GoPay (085603088228)</option>
+                                <option value="DANA">3. DANA (083878003915)</option>
                             </select>
                         </div>
                     </div>
@@ -127,13 +140,24 @@
             </div>
         </section>
 
+        <!-- ADMIN PANEL -->
         <section id="adminSection" class="hidden space-y-5">
             <div class="bg-cardBg p-5 rounded-2xl border border-neonPurple/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] space-y-3">
                 <div class="flex justify-between items-center">
                     <h2 class="text-base font-bold text-neonPurple"><i class="fa-solid fa-code mr-2"></i> Developer Control Panel</h2>
                     <button onclick="resetData()" class="px-2.5 py-1 text-[10px] bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg hover:bg-red-500/30 transition">Reset Default</button>
                 </div>
-                <p class="text-xs text-slate-400">Edit daftar game, tambah nominal, atau ubah harga langsung dari panel ini.</p>
+                <p class="text-xs text-slate-400">Edit daftar game, tambah nominal, atau atur mode maintenance dari panel ini.</p>
+            </div>
+
+            <!-- KONTROL MAINTENANCE DI PANEL ADMIN -->
+            <div class="bg-cardBg p-5 rounded-2xl border border-yellow-500/40 space-y-3">
+                <h3 class="font-bold text-sm text-yellow-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Pengaturan Mode Maintenance</h3>
+                <p class="text-xs text-slate-400">Nyalakan mode ini jika Anda sedang memperbaiki website atau mengedit data agar pengunjung melihat halaman perbaikan.</p>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
+                    <span id="maintenanceStatusText" class="text-xs font-bold text-white">Status: Nonaktif</span>
+                    <button onclick="toggleMaintenance()" id="maintenanceBtn" class="px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400">Aktifkan Maintenance</button>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -177,23 +201,18 @@
         </section>
 
     </main>
+    <!-- INVOICE MODAL -->
     <div id="invoiceModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-cardBg border border-neonBlue rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-neon-lg">
             <div class="text-center space-y-1">
                 <div class="w-12 h-12 mx-auto rounded-full bg-neonBlue/20 text-neonBlue flex items-center justify-center text-xl font-bold mb-2">
-                    <i class="fa-solid fa-qrcode"></i>
+                    <i class="fa-solid fa-receipt"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white">Sancheszx Store - QRIS</h3>
-                <p class="text-xs text-slate-400">Scan QRIS di bawah ini untuk membayar.</p>
+                <h3 class="text-lg font-bold text-white">Sancheszx Store - Invoice</h3>
+                <p class="text-xs text-slate-400">Selesaikan pembayaran sesuai metode pilihan.</p>
             </div>
 
-            <div class="bg-darkBg p-3 rounded-xl text-center space-y-2 border border-slate-800">
-                <div class="bg-white p-2 rounded-lg inline-block">
-                    <!-- Menggunakan direct image link agar langsung muncul di semua HP -->
-                    <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS Sancheszx Store" class="w-32 h-32 mx-auto object-contain">
-                </div>
-                <p class="text-[10px] text-slate-400">NMID : ID1026571642747 (Satu QRIS untuk Semua)</p>
-            </div>
+            <div id="paymentContentContainer" class="bg-darkBg p-3 rounded-xl text-center space-y-2 border border-slate-800"></div>
 
             <div class="bg-darkBg p-3 rounded-xl space-y-1.5 text-xs border border-slate-800">
                 <div class="flex justify-between"><span class="text-slate-400">Game:</span> <span id="invGame" class="font-bold text-white"></span></div>
@@ -218,6 +237,7 @@
         <p>&copy; 2026 Sancheszx Store. All rights reserved.</p>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         const defaultData = [
             { id: 'ff', name: 'Free Fire', icon: 'fa-solid fa-fire', items: [{name: '70 Diamonds', price: 10000}, {name: '140 Diamonds', price: 20000}, {name: '355 Diamonds', price: 50000}] },
@@ -229,6 +249,7 @@
         ];
 
         let gamesData = JSON.parse(localStorage.getItem('gojoStoreData')) || defaultData;
+        let isMaintenance = JSON.parse(localStorage.getItem('sancheszxMaintenance')) || false;
 
         function saveData() {
             localStorage.setItem('gojoStoreData', JSON.stringify(gamesData));
@@ -244,6 +265,43 @@
             }
         }
 
+        // FUNGSI TOGGLE MAINTENANCE
+        function toggleMaintenance() {
+            isMaintenance = !isMaintenance;
+            localStorage.setItem('sancheszxMaintenance', JSON.stringify(isMaintenance));
+            updateMaintenanceUI();
+            checkMaintenanceMode();
+            alert(isMaintenance ? "Mode Maintenance diaktifkan! Pengunjung luar akan melihat halaman perbaikan." : "Mode Maintenance dimatikan! Web kembali normal.");
+        }
+
+        function updateMaintenanceUI() {
+            const statusText = document.getElementById('maintenanceStatusText');
+            const btn = document.getElementById('maintenanceBtn');
+            if (statusText && btn) {
+                if (isMaintenance) {
+                    statusText.innerText = "Status: AKTIF (Web Ditutup untuk Pengunjung)";
+                    statusText.className = "text-xs font-bold text-red-400";
+                    btn.innerText = "Matikan Maintenance";
+                    btn.className = "px-4 py-2 bg-red-500 text-white font-bold text-xs rounded-xl shadow-lg transition hover:bg-red-400";
+                } else {
+                    statusText.innerText = "Status: Nonaktif (Web Normal)";
+                    statusText.className = "text-xs font-bold text-green-400";
+                    btn.innerText = "Aktifkan Maintenance";
+                    btn.className = "px-4 py-2 bg-yellow-500 text-darkBg font-bold text-xs rounded-xl shadow-lg transition hover:bg-yellow-400";
+                }
+            }
+        }
+
+        function checkMaintenanceMode() {
+            const overlay = document.getElementById('maintenanceOverlay');
+            if (!overlay) return;
+            if (isMaintenance && !isAdminLoggedIn) {
+                overlay.classList.remove('hidden');
+            } else {
+                overlay.classList.add('hidden');
+            }
+        }
+
         let isAdminLoggedIn = false;
         function tryOpenAdmin() {
             if (isAdminLoggedIn) {
@@ -251,8 +309,9 @@
                 return;
             }
             let pass = prompt("Masukkan Password Developer/Admin:");
-            if (pass === "1234") {
+            if (pass === "sancheszx357") {
                 isAdminLoggedIn = true;
+                checkMaintenanceMode(); // Sembunyikan layar maintenance jika admin masuk
                 switchTab('admin');
                 alert("Login Admin Berhasil!");
             } else if (pass !== null) {
@@ -277,6 +336,7 @@
                 navAdmin.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-neonPurple bg-neonPurple/10 border border-neonPurple/40 transition";
                 navShop.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
                 renderAdmin();
+                updateMaintenanceUI();
             }
         }
 
@@ -355,11 +415,40 @@
             document.getElementById('invPay').innerText = currentOrderData.payment;
             document.getElementById('invPrice').innerText = currentOrderData.price;
 
+            const paymentContainer = document.getElementById('paymentContentContainer');
+            if (paymentMethod === 'QRIS') {
+                paymentContainer.innerHTML = `
+                    <div class="bg-white p-2 rounded-lg inline-block">
+                        <img src="https://i.ibb.co/rK4sJyJj/1000479049.jpg" alt="QRIS Sancheszx Store" class="w-32 h-32 mx-auto object-contain">
+                    </div>
+                    <p class="text-[10px] text-slate-400">Scan QRIS pakai semua m-Banking / E-Wallet</p>
+                `;
+            } else if (paymentMethod === 'GoPay') {
+                paymentContainer.innerHTML = `
+                    <div class="py-3 space-y-1">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest">Nomor Tujuan GoPay</span>
+                        <div class="text-lg font-extrabold text-neonBlue">6285603088228</div>
+                        <p class="text-[10px] text-slate-400">Atas Nama: Sancheszx Store</p>
+                    </div>
+                `;
+            } else if (paymentMethod === 'DANA') {
+                paymentContainer.innerHTML = `
+                    <div class="py-3 space-y-1">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest">Nomor Tujuan DANA</span>
+                        <div class="text-lg font-extrabold text-neonBlue">6283878003915</div>
+                        <p class="text-[10px] text-slate-400">Atas Nama: Sancheszx Store</p>
+                    </div>
+                `;
+            }
+
             document.getElementById('invoiceModal').classList.remove('hidden');
         }
 
         function sendToWhatsApp() {
-            const adminPhone = "6285603088228";
+            let adminPhone = "6285603088228"; // Default GoPay / QRIS
+            if (currentOrderData.payment === "DANA") {
+                adminPhone = "6283878003915";
+            }
             
             const message = `Halo Admin Sancheszx Store, saya ingin konfirmasi pembayaran top-up:\n\n` +
                             `🎮 Game: ${currentOrderData.game}\n` +
@@ -458,6 +547,7 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             renderShop();
+            checkMaintenanceMode();
         });
     </script>
 </body>
